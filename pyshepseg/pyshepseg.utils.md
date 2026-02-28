@@ -5,7 +5,7 @@
 ### class WorkerErrorRecord
       Hold a record of an exception raised in a remote worker.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; WorkerErrorRecord.\__init__(self, exc, workerType)
+#### &nbsp;&nbsp;&nbsp;&nbsp; WorkerErrorRecord.\_\_init\_\_(self, exc, workerType)
         Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions

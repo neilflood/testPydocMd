@@ -71,7 +71,7 @@
         rowcols : uint32 ndarray (length, 2)
           Row and col numbers of pixels in the segment
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RowColArray.\__init__(self, length)
+#### &nbsp;&nbsp;&nbsp;&nbsp; RowColArray.\_\_init\_\_(self, length)
         Initialize the data structure
         
         Parameters
@@ -110,7 +110,7 @@
         smallSegmentsEliminated : int
           Number of small segments merged into adjacent segments
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResult.\__init__(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResult.\_\_init\_\_(self)
         Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
@@ -311,18 +311,18 @@
 
 ## Values
     MINSEGID = 1
-    RowColArray_Type = instance.jitclass.RowColArray#743506b873d0<idx:uint32,rowcols:array(uint32, 2d, A)>
+    RowColArray_Type = instance.jitclass.RowColArray#7d072bf8f1d0<idx:uint32,rowcols:array(uint32, 2d, A)>
     SEGNULLVAL = 0
-    buildSegmentSpectra = CPUDispatcher(<function buildSegmentSpectra at 0x743506b7d940>)
-    clump = CPUDispatcher(<function clump at 0x743506b7c860>)
+    buildSegmentSpectra = CPUDispatcher(<function buildSegmentSpectra at 0x7d072bf85940>)
+    clump = CPUDispatcher(<function clump at 0x7d072bf84860>)
     division = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)
-    doMerge = CPUDispatcher(<function doMerge at 0x743506b94ae0>)
-    eliminateSmallSegments = CPUDispatcher(<function eliminateSmallSegments at 0x743506b94540>)
-    findMergeSegment = CPUDispatcher(<function findMergeSegment at 0x743506b94680>)
-    findNearestNeighbourPixel = CPUDispatcher(<function findNearestNeighbourPixel at 0x743506b7d120>)
-    makeSegSize = CPUDispatcher(<function makeSegSize at 0x743506b7c900>)
-    makeSegmentLocations = CPUDispatcher(<function makeSegmentLocations at 0x743506b7da80>)
-    mergeSinglePixels = CPUDispatcher(<function mergeSinglePixels at 0x743506b7d080>)
+    doMerge = CPUDispatcher(<function doMerge at 0x7d072bf9cae0>)
+    eliminateSmallSegments = CPUDispatcher(<function eliminateSmallSegments at 0x7d072bf9c540>)
+    findMergeSegment = CPUDispatcher(<function findMergeSegment at 0x7d072bf9c680>)
+    findNearestNeighbourPixel = CPUDispatcher(<function findNearestNeighbourPixel at 0x7d072bf85120>)
+    makeSegSize = CPUDispatcher(<function makeSegSize at 0x7d072bf84900>)
+    makeSegmentLocations = CPUDispatcher(<function makeSegmentLocations at 0x7d072bf85a80>)
+    mergeSinglePixels = CPUDispatcher(<function mergeSinglePixels at 0x7d072bf85080>)
     print_function = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 1048576)
-    relabelSegments = CPUDispatcher(<function relabelSegments at 0x743506b7d620>)
+    relabelSegments = CPUDispatcher(<function relabelSegments at 0x7d072bf85620>)
     spec = [('idx', uint32), ('rowcols', Array(uint32, 2, 'A', False, aligned=True))]

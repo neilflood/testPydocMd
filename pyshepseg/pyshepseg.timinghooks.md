@@ -5,7 +5,7 @@
 ### class AllTests
       Run all tests
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AllTests.\__init__(self, methodName='runTest')
+#### &nbsp;&nbsp;&nbsp;&nbsp; AllTests.\_\_init\_\_(self, methodName='runTest')
         Create an instance of the class that will use the named test
         method when executed. Raises a ValueError if the instance does
         not have a method with the specified name.
@@ -399,7 +399,7 @@
 #### &nbsp;&nbsp;&nbsp;&nbsp; AllTests.skipTest(self, reason)
         Skip this test.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AllTests.subTest(self, msg=<object object at 0x743548b871e0>, **params)
+#### &nbsp;&nbsp;&nbsp;&nbsp; AllTests.subTest(self, msg=<object object at 0x7d076e8a69d0>, **params)
         Return a context manager that will return the enclosed block
         of code in a subtest identified by the optional message and
         keyword parameters.  A failure in the subtest marks the test
@@ -467,7 +467,7 @@
       used to generate a report at the end of the application to present to a
       user, showing how the key parts of the application compare in time taken.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.\__init__(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.\_\_init\_\_(self)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; Timers.getDurationsForName(self, intervalName)

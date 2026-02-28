@@ -40,7 +40,7 @@
         through. When using a RatZarr file, the colNdx is translated to
         a column name and the data written to that column.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.\__init__(self, ds=None, band=None, rz=None)
+#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.\_\_init\_\_(self, ds=None, band=None, rz=None)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.checkColType(self, colName, colType)
@@ -65,7 +65,7 @@
 ### class RatPage
       Hold a single page of the paged RAT
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.\__init__(self, numIntCols, numFloatCols, startSegId, numSeg)
+#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.\_\_init\_\_(self, numIntCols, numFloatCols, startSegId, numSeg)
         Allocate arrays for int and float columns. Int columns are
         stored as signed int32, floats are float32. 
         
@@ -102,13 +102,13 @@
       Used so that all the data for a given segment can be collected
       together even if the segment straddles a tile.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegPoint.\__init__(self, x, y, val)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegPoint.\_\_init\_\_(self, x, y, val)
         Initialize self.  See help(type(self)) for accurate signature.
 
 ### class SegmentStats
       Manage statistics for a single segment
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.\__init__(self, segmentHistDict, missingStatsValue)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.\_\_init\_\_(self, segmentHistDict, missingStatsValue)
         Construct with generic statistics, given a typed 
         dictionary of the histogram counts of all values
         in the segment.
@@ -140,7 +140,7 @@
           Number of seconds to wait to get tile data from read buffer.
           Only relevant if using read workers.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadConfig.\__init__(self, numWorkers=0, bufferInsertTimeout=60, bufferPopTimeout=60)
+#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadConfig.\_\_init\_\_(self, numWorkers=0, bufferInsertTimeout=60, bufferPopTimeout=60)
         Initialize self.  See help(type(self)) for accurate signature.
 
 ### class StatsReadManager
@@ -173,7 +173,7 @@
           A Timers object in which read timings are recorded. Default will
           discard timings.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.\__init__(self, imgfile, imgbandnum, segfile=None, segbandnum=1, segband=None, readCfg=None, tileSize=None, numXtiles=None, numYtiles=None, timings=None)
+#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.\_\_init\_\_(self, imgfile, imgbandnum, segfile=None, segbandnum=1, segband=None, readCfg=None, tileSize=None, numXtiles=None, numYtiles=None, timings=None)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.close(self)
@@ -225,7 +225,7 @@
         timings : pyshepseg.timinghooks.Timers
           Timings for various key parts of the per-segment stats calculation
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TiledStatsResult.\__init__(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp; TiledStatsResult.\_\_init\_\_(self)
         Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
@@ -729,7 +729,7 @@
     HAVE_RATZARR = False
     HAVE_RIOS = False
     NOPARAM = 4294967295
-    PTS_TYPE = instance.jitclass.SegPoint#7435068f8750<x:uint32,y:uint32,val:int64>
+    PTS_TYPE = instance.jitclass.SegPoint#7d072bd2bf10<x:uint32,y:uint32,val:int64>
     RAT_PAGE_SIZE = 100000
     STATID_MAX = 1
     STATID_MEAN = 2
@@ -748,22 +748,22 @@
     STAT_DTYPE_FLOAT = 1
     STAT_DTYPE_INT = 0
     SegPointSpec = [('x', uint32), ('y', uint32), ('val', int64)]
-    accumulateSegDict = CPUDispatcher(<function accumulateSegDict at 0x7435068db880>)
-    accumulateSegSpatial = CPUDispatcher(<function accumulateSegSpatial at 0x7435060da480>)
-    calcStatsForCompletedSegs = CPUDispatcher(<function calcStatsForCompletedSegs at 0x7435068dba60>)
-    calcStatsForCompletedSegsSpatial = CPUDispatcher(<function calcStatsForCompletedSegsSpatial at 0x74350601cfe0>)
-    checkSegComplete = CPUDispatcher(<function checkSegComplete at 0x7435068db920>)
-    checkSegCompleteSpatial = CPUDispatcher(<function checkSegCompleteSpatial at 0x7435060da660>)
-    convertPtsInto2DArray = CPUDispatcher(<function convertPtsInto2DArray at 0x7435060bff60>)
-    convertPtsInto2DMaskArray = CPUDispatcher(<function convertPtsInto2DMaskArray at 0x7435060bfe20>)
-    getRatPageId = CPUDispatcher(<function getRatPageId at 0x74350601dee0>)
-    getSortedKeysAndValuesForDict = CPUDispatcher(<function getSortedKeysAndValuesForDict at 0x7435068f4400>)
+    accumulateSegDict = CPUDispatcher(<function accumulateSegDict at 0x7d072bd17880>)
+    accumulateSegSpatial = CPUDispatcher(<function accumulateSegSpatial at 0x7d072b7df7e0>)
+    calcStatsForCompletedSegs = CPUDispatcher(<function calcStatsForCompletedSegs at 0x7d072bd17a60>)
+    calcStatsForCompletedSegsSpatial = CPUDispatcher(<function calcStatsForCompletedSegsSpatial at 0x7d072b4999e0>)
+    checkSegComplete = CPUDispatcher(<function checkSegComplete at 0x7d072bd17920>)
+    checkSegCompleteSpatial = CPUDispatcher(<function checkSegCompleteSpatial at 0x7d072bd318a0>)
+    convertPtsInto2DArray = CPUDispatcher(<function convertPtsInto2DArray at 0x7d072bd32160>)
+    convertPtsInto2DMaskArray = CPUDispatcher(<function convertPtsInto2DMaskArray at 0x7d072b50bce0>)
+    getRatPageId = CPUDispatcher(<function getRatPageId at 0x7d072b498860>)
+    getSortedKeysAndValuesForDict = CPUDispatcher(<function getSortedKeysAndValuesForDict at 0x7d072bd30400>)
     numbaTypeForImageType = int64
     ratPageSpec = [('startSegId', uint32), ('intcols', Array(int64, 2, 'A', False, aligned=True)), ('floatcols', Array(float32, 2, 'A', False, aligned=True)), ('complete', Array(bool, 1, 'A', False, aligned=True))]
     ratzarr = None
     segIdNumbaType = uint32
     segStatsSpec = [('pixVals', Array(int64, 1, 'A', False, aligned=True)), ('counts', Array(uint32, 1, 'A', False, aligned=True)), ('pixCount', uint32), ('min', int64), ('max', int64), ('mean', float32), ('stddev', float32), ('median', int64), ('mode', int64), ('missingStatsValue', int64)]
     statIDdict = {'min': 0, 'max': 1, 'mean': 2, 'stddev': 3, 'median': 4, 'mode': 5, 'percentile': 6, 'pixcount': 7}
-    userFuncMeanCoord = CPUDispatcher(<function userFuncMeanCoord at 0x7435068f4a40>)
-    userFuncNumEdgePixels = CPUDispatcher(<function userFuncNumEdgePixels at 0x7435068f54e0>)
-    userFuncVariogram = CPUDispatcher(<function userFuncVariogram at 0x7435068f44a0>)
+    userFuncMeanCoord = CPUDispatcher(<function userFuncMeanCoord at 0x7d072bd30a40>)
+    userFuncNumEdgePixels = CPUDispatcher(<function userFuncNumEdgePixels at 0x7d072bd314e0>)
+    userFuncVariogram = CPUDispatcher(<function userFuncVariogram at 0x7d072bd304a0>)

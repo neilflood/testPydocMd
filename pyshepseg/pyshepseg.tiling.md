@@ -77,7 +77,7 @@
           the ECS cluster, task definition and tasks. The keys and values
           must all be strings. Requires ``ecs:TagResource`` permission.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FargateConfig.\__init__(self, containerImage=None, taskRoleArn=None, executionRoleArn=None, subnet=None, securityGroups=None, cpu='0.5 vCPU', memory='1GB', cpuArchitecture=None, cloudwatchLogGroup=None, tags=None)
+#### &nbsp;&nbsp;&nbsp;&nbsp; FargateConfig.\_\_init\_\_(self, containerImage=None, taskRoleArn=None, executionRoleArn=None, subnet=None, securityGroups=None, cpu='0.5 vCPU', memory='1GB', cpuArchitecture=None, cloudwatchLogGroup=None, tags=None)
         AWS Fargate configuration information. For use only with CONC_FARGATE.
 
 ### class HistogramAccumulator
@@ -86,7 +86,7 @@
       Note that there are simplifying assumptions about being uint32, and
       the null value being zero, so don't try to use this for anything else.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.\__init__(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.\_\_init\_\_(self)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.addTwoHistograms(hist1, hist2)
@@ -109,7 +109,7 @@
       Created from either the server or the client end, the constructor
       takes 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\__init__(self, inQue=None, segResultCache=None, forceExit=None, exceptionQue=None, segDataDict=None, readSemaphore=None, timings=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
+#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\_\_init\_\_(self, inQue=None, segResultCache=None, forceExit=None, exceptionQue=None, segDataDict=None, readSemaphore=None, timings=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.addressStr(self)
@@ -137,7 +137,7 @@
 ### class SegFargateMgr
       Run tiled segmentation with concurrency based on AWS Fargate workers.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.\__init__(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
         Constructor. Just saves all its arguments to self, and does a couple
         of quick checks.
 
@@ -374,7 +374,7 @@
 ### class SegNoConcurrencyMgr
       Runs tiled segmentation with no concurrency
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.\__init__(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
         Constructor. Just saves all its arguments to self, and does a couple
         of quick checks.
 
@@ -601,7 +601,7 @@
       This is used only as a test bed for the NetworkDataChannel and external
       worker command, and should not be used in real life.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.\__init__(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
         Constructor. Just saves all its arguments to self, and does a couple
         of quick checks.
 
@@ -827,7 +827,7 @@
       Run tiled segmentation with concurrency based on threads within the main
       process.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.\__init__(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
         Constructor. Just saves all its arguments to self, and does a couple
         of quick checks.
 
@@ -1093,13 +1093,13 @@
         fargateCfg : None or instance of FargateConfig
           Configuration for AWS Fargate (when using CONC_FARGATE)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyConfig.\__init__(self, concurrencyType='CONC_NONE', numWorkers=0, maxConcurrentReads=20, tileCompletionTimeout=60, segResultCacheSize=30, segResultCacheAddTimeout=300, barrierTimeout=300, fargateCfg=None)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyConfig.\_\_init\_\_(self, concurrencyType='CONC_NONE', numWorkers=0, maxConcurrentReads=20, tileCompletionTimeout=60, segResultCacheSize=30, segResultCacheAddTimeout=300, barrierTimeout=300, fargateCfg=None)
         Configuration for managing segmentation concurrency.
 
 ### class SegmentationConcurrencyMgr
       Base class for segmentation concurrency
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.\__init__(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
         Constructor. Just saves all its arguments to self, and does a couple
         of quick checks.
 
@@ -1326,7 +1326,7 @@
       a tile, it adds it directly to this cache. The writing thread can then
       pop tiles out of this when required.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.\__init__(self, colRowList, timeout=None, size=10, addTimeout=300)
+#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.\_\_init\_\_(self, colRowList, timeout=None, size=10, addTimeout=300)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.addResult(self, col, row, segResult)
@@ -1340,7 +1340,7 @@
       Class that holds the pixel coordinates of the tiles within 
       an image. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.\__init__(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.\_\_init\_\_(self)
         Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.addTile(self, xpos, ypos, xsize, ysize, col, row)
@@ -1407,7 +1407,7 @@
           Open GDAL dataset object to the output file. May be None,
           see the returnGDALDS parameter to doTiledShepherdSegmentation.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TiledSegmentationResult.\__init__(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp; TiledSegmentationResult.\_\_init\_\_(self)
         Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
@@ -1654,4 +1654,4 @@
     VERTICAL = 1
     boto3 = None
     segIdNumbaType = uint32
-    updateCounts = CPUDispatcher(<function updateCounts at 0x743506a16e80>)
+    updateCounts = CPUDispatcher(<function updateCounts at 0x7d072be1ae80>)
