@@ -21,21 +21,21 @@
 ### class BlockCollection
       Hold a set of RatBlockAssociation objects, for all currently open RATs
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.\_\_init\_\_(self, ratAssoc, state, allFileHandles, controls)
-        Create a RatBlockAssociation entry for every RatHandle in ratAssoc
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.\_\_init\_\_(self, ratAssoc, state, allFileHandles, controls)
+          Create a RatBlockAssociation entry for every RatHandle in ratAssoc
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.clearCache(self)
-        Clear all caches
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.clearCache(self)
+          Clear all caches
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.finaliseRowCount(self, outputRatHandleNameList)
-        Called after the block loop completes, to reset the row count of
-        each output RAT, in case it had been over-allocated. 
-        
-        In some raster formats, this will not reclaim space, but we still would
-        like the row count to be correct. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.finaliseRowCount(self, outputRatHandleNameList)
+          Called after the block loop completes, to reset the row count of
+          each output RAT, in case it had been over-allocated. 
+          
+          In some raster formats, this will not reclaim space, but we still would
+          like the row count to be correct. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.writeCache(self, outputRatHandleNameList, controls, state)
-        Write all cached data blocks
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockCollection.writeCache(self, outputRatHandleNameList, controls, state)
+          Write all cached data blocks
 
 ### class FileHandles
       Hang onto all the required file-related objects relating to a given
@@ -51,57 +51,57 @@
           * **rz**                  The RatZarr object
           
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandles.\_\_init\_\_(self, ratHandle, update=False, sharedDS=None)
-        If update is True, the GDAL dataset is opened with gdal.GA_Update.
-        If sharedDS is not None, this is used as the GDAL dataset, rather
-        than opening a new one. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandles.\_\_init\_\_(self, ratHandle, update=False, sharedDS=None)
+          If update is True, the GDAL dataset is opened with gdal.GA_Update.
+          If sharedDS is not None, this is used as the GDAL dataset, rather
+          than opening a new one. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandles.close(self)
-        Close any open file handles
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandles.close(self)
+          Close any open file handles
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandles.getRatObj(self)
-        Return the RAT object. For Zarr, this is just the RatZarr object,
-        while for GDAL it is the RasterAttributeTable object
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandles.getRatObj(self)
+          Return the RAT object. For Zarr, this is just the RatZarr object,
+          while for GDAL it is the RasterAttributeTable object
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandles.getRowCount(self)
-        Return the current row count of the RAT object
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandles.getRowCount(self)
+          Return the current row count of the RAT object
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandles.setRowCount(self, rowCount)
-        Set the row count on the appropriate RAT object
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandles.setRowCount(self, rowCount)
+          Set the row count on the appropriate RAT object
 
 ### class FileHandlesCollection
       A set of all the FileHandles objects
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.\_\_init\_\_(self, inRats, outRats)
-        Open all the raster files, storing a dictionary of FileHandles objects
-        as self.fileHandlesDict. This is keyed by RatHandle objects. 
-        
-        Output files are opened first, with update=True. Any input files which
-        are not open are then opened with update=False.
-        
-        Extra effort is made to cope with the very unlikely case of opening
-        RATs on separate layers in the same image file, mostly because if
-        it did happen, it would go horribly wrong. Such cases are able to share 
-        the same gdal.Dataset object. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.\_\_init\_\_(self, inRats, outRats)
+          Open all the raster files, storing a dictionary of FileHandles objects
+          as self.fileHandlesDict. This is keyed by RatHandle objects. 
+          
+          Output files are opened first, with update=True. Any input files which
+          are not open are then opened with update=False.
+          
+          Extra effort is made to cope with the very unlikely case of opening
+          RATs on separate layers in the same image file, mostly because if
+          it did happen, it would go horribly wrong. Such cases are able to share 
+          the same gdal.Dataset object. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.checkConsistency(self)
-        Check the consistency of the set of input RATs opened on the current instance.
-        It is kind of assumed that the output rats will become consistent, although
-        this is by no means guaranteed. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.checkConsistency(self)
+          Check the consistency of the set of input RATs opened on the current instance.
+          It is kind of assumed that the output rats will become consistent, although
+          this is by no means guaranteed. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.checkExistingDS(self, ratHandle)
-        Checks the current set of filenames in use, and if it finds one with the same
-        filename as the given ratHandle, assumes that it is already open, but with a 
-        different layer number. If so, return the gdal.Dataset associated with it,
-        so it can be shared. If not found, return None. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.checkExistingDS(self, ratHandle)
+          Checks the current set of filenames in use, and if it finds one with the same
+          filename as the given ratHandle, assumes that it is already open, but with a 
+          different layer number. If so, return the gdal.Dataset associated with it,
+          so it can be shared. If not found, return None. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.close(self)
-        Close all file handles
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.close(self)
+          Close all file handles
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.getRowCount(self)
-        Return the number of rows in the RATs of all files. Actually
-        just returns the row count of the first input RAT, assuming 
-        that they are all the same (see self.checkConsistency())
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileHandlesCollection.getRowCount(self)
+          Return the number of rows in the RATs of all files. Actually
+          just returns the row count of the first input RAT, assuming 
+          that they are all the same (see self.checkConsistency())
 
 ### class OtherArguments
       Simple empty class which can be used to pass arbitrary arguments in and 
@@ -112,59 +112,59 @@
       Controls object for the ratapplier. An instance of this class can
       be given to the apply() function, to control its behaviour. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.outputRowCountHandling(self, method=0, totalsize=None, incrementsize=None)
-        Determine how the row count of the output RAT(s) is handled. The method
-        argument can be one of the following constants:
-        
-            * RCM_EQUALS_INPUT        Output RAT(s) have same number of rows as input RAT(s)
-            * RCM_FIXED               Output row count is set to a fixed size
-            * RCM_INCREMENT           Output row count is incremented as required
-            
-        
-        The totalsize and incrementsize arguments, if given, should be int.
-        
-        totalsize is used to set the output row count when the method is RCM_FIXED. 
-        It is required, if the method is RCM_FIXED. 
-        
-        incrementsize is used to determine how much the row count is
-        incremented by, if the method is RCM_INCREMENT. If not given,
-        it defaults to the length of the block being written. 
-        
-        The most common case if the default (i.e. RCM_EQUALS_INPUT). If the
-        output RAT row count will be different from the input, and the count can 
-        be known in advance, then you should use RCM_FIXED to set that size. Only 
-        if the output RAT row count cannot be determined in advance should 
-        you use RCM_INCREMENT. 
-        
-        For some raster formats, using RCM_INCREMENT will result in wasted
-        space, depending on the incrementsize used. Caution is recommended. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.outputRowCountHandling(self, method=0, totalsize=None, incrementsize=None)
+          Determine how the row count of the output RAT(s) is handled. The method
+          argument can be one of the following constants:
+          
+              * RCM_EQUALS_INPUT        Output RAT(s) have same number of rows as input RAT(s)
+              * RCM_FIXED               Output row count is set to a fixed size
+              * RCM_INCREMENT           Output row count is incremented as required
+              
+          
+          The totalsize and incrementsize arguments, if given, should be int.
+          
+          totalsize is used to set the output row count when the method is RCM_FIXED. 
+          It is required, if the method is RCM_FIXED. 
+          
+          incrementsize is used to determine how much the row count is
+          incremented by, if the method is RCM_INCREMENT. If not given,
+          it defaults to the length of the block being written. 
+          
+          The most common case if the default (i.e. RCM_EQUALS_INPUT). If the
+          output RAT row count will be different from the input, and the count can 
+          be known in advance, then you should use RCM_FIXED to set that size. Only 
+          if the output RAT row count cannot be determined in advance should 
+          you use RCM_INCREMENT. 
+          
+          For some raster formats, using RCM_INCREMENT will result in wasted
+          space, depending on the incrementsize used. Caution is recommended. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setBlockLength(self, blockLen)
-        Change the number of rows used per block
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setBlockLength(self, blockLen)
+          Change the number of rows used per block
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setProgress(self, progress)
-        Set the progress display object. Default is no progress
-        object. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setProgress(self, progress)
+          Set the progress display object. Default is no progress
+          object. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setRowCount(self, rowCount)
-        Set the total number of rows to be processed. This is normally only useful
-        when doing something like writing an output RAT without any input RAT,
-        so the number of rows is otherwise undefined. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setRowCount(self, rowCount)
+          Set the total number of rows to be processed. This is normally only useful
+          when doing something like writing an output RAT without any input RAT,
+          so the number of rows is otherwise undefined. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setUseStringDType(self, useStringDType)
-        Set whether to use the numpy-2.x StringDType when reading GFT_String
-        columns. If this is True, then when data is read from a GFT_String
-        column, it will be converted to StringDType (i.e. an array of
-        variable-length strings) before presenting it to the user.
-        
-        The default is the old behaviour, i.e. the returned string arrays
-        are fixed-width bytes string arrays.
-        
-        If StringDType is unavailable (numpy < 2.0), this flag is
-        always False.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierControls.setUseStringDType(self, useStringDType)
+          Set whether to use the numpy-2.x StringDType when reading GFT_String
+          columns. If this is True, then when data is read from a GFT_String
+          column, it will be converted to StringDType (i.e. an array of
+          variable-length strings) before presenting it to the user.
+          
+          The default is the old behaviour, i.e. the returned string arrays
+          are fixed-width bytes string arrays.
+          
+          If StringDType is unavailable (numpy < 2.0), this flag is
+          always False.
 
 ### class RatApplierState
       Current state of RAT applier. An instance of this class is passed as the first
@@ -179,18 +179,18 @@
           * rowCount                The total number of rows in the input RAT(s)
           
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierState.\_\_init\_\_(self, rowCount)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierState.\_\_init\_\_(self, rowCount)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatApplierState.setBlock(self, i, requestedBlockLen)
-        Sets the state to be pointing at the i-th block. i starts at zero. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatApplierState.setBlock(self, i, requestedBlockLen)
+          Sets the state to be pointing at the i-th block. i starts at zero. 
 
 ### class RatAssociations
       Class associating external raster attribute tables with internal names. 
       Each attribute defined on this object should be a RatHandle object. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatAssociations.getRatList(self)
-        Return a list of the names of the RatHandle objects defined on this object
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatAssociations.getRatList(self)
+          Return a list of the names of the RatHandle objects defined on this object
 
 ### class RatBlockAssociation
       Hold one or more blocks of data from RAT columns of a single RAT. This
@@ -210,64 +210,60 @@
       the userFunc is not actually using. As a consequence, one also needs to
       use __setattr__ to handle the data the same way. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.__makeKey(self, columnName)
-        Key includes the startrow so we cannot accidentally use data from one block as 
-        though it were from another. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.\_\_init\_\_(self, state, fileHandles, controls)
+          Pass in the RatApplierState object, so we can always see where we 
+          are up to, and the associated FileHandles object, so we can get to 
+          the file.
+          
+          Note the use of object.__setattr__() to create the normal attributes
+          on the object, so they do not behave as RAT column blocks. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.\_\_init\_\_(self, state, fileHandles, controls)
-        Pass in the RatApplierState object, so we can always see where we 
-        are up to, and the associated FileHandles object, so we can get to 
-        the file.
-        
-        Note the use of object.__setattr__() to create the normal attributes
-        on the object, so they do not behave as RAT column blocks. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.checkZarrfileParams(self)
+          Check if the Zarr file has only just been created. If so,
+          initialize it with suitable parameters
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.checkZarrfileParams(self)
-        Check if the Zarr file has only just been created. If so,
-        initialize it with suitable parameters
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.clearCache(self)
+          Clear the current cache of data blocks
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.clearCache(self)
-        Clear the current cache of data blocks
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.finaliseRowCount(self)
+          If the row count for this RAT has been over-allocated, reset it back
+          to the actual number of rows we wrote. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.finaliseRowCount(self)
-        If the row count for this RAT has been over-allocated, reset it back
-        to the actual number of rows we wrote. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.getUsage(self, columnName)
+          Return the usage of the given column
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.getUsage(self, columnName)
-        Return the usage of the given column
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.guessNewRowCount(self, rowsToWrite, controls, state)
+          When we are writing to a new RAT, and we find that we need to write more
+          rows than it currently has, we guess what we should set the row count to
+          be, depending on how the controls have told us to do this. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.guessNewRowCount(self, rowsToWrite, controls, state)
-        When we are writing to a new RAT, and we find that we need to write more
-        rows than it currently has, we guess what we should set the row count to
-        be, depending on how the controls have told us to do this. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.setUsage(self, columnName, usage)
+          Set the usage of the given column. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.setUsage(self, columnName, usage)
-        Set the usage of the given column. 
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.writeCache(self, controls, state)
-        Write all cached data blocks. Creates the columns if they do not already exist. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatBlockAssociation.writeCache(self, controls, state)
+          Write all cached data blocks. Creates the columns if they do not already exist. 
 
 ### class RatHandle
       A handle onto the RAT for a single image layer. This is used as an 
       easy way for the user to nominate both a filename and a layer number. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatHandle.\_\_init\_\_(self, filename, layernum=1)
-        This is how the user specifies a RAT stored in a GDAL file.
-        
-        filename is a string, layernum is an integer (first layer is 1)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatHandle.\_\_init\_\_(self, filename, layernum=1)
+          This is how the user specifies a RAT stored in a GDAL file.
+          
+          filename is a string, layernum is an integer (first layer is 1)
 
 ### class RatZarrHandle
       Equivalent of RatHandle, but for a RAT stored in a Zarr file
       
       New in version 2.0.9
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatZarrHandle.\_\_init\_\_(self, filename)
-        This is how the user specifies a RAT stored in a Zarr file.
-        
-        filename is a string. For local files, should be just a path string,
-        for AWS S3 files it should have the form s3://bucket/path
-        
-        New in version 2.0.9
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatZarrHandle.\_\_init\_\_(self, filename)
+          This is how the user specifies a RAT stored in a Zarr file.
+          
+          filename is a string. For local files, should be just a path string,
+          for AWS S3 files it should have the form s3://bucket/path
+          
+          New in version 2.0.9
 
 ## Functions
 ### def apply(userFunc, inRats, outRats, otherargs=None, controls=None)

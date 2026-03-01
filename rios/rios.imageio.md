@@ -15,8 +15,8 @@
 ### class Coord
       a simple class that contains one coord
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Coord.\_\_init\_\_(self, x, y)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Coord.\_\_init\_\_(self, x, y)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def GDALTypeToNumpyType(gdaltype)

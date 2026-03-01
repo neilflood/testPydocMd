@@ -6,8 +6,8 @@
 ### class ApplierBlockDefn
       Defines a single block of the working grid. Is hashable and ordered.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ApplierBlockDefn.\_\_init\_\_(self, top, left, nrows, ncols)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ApplierBlockDefn.\_\_init\_\_(self, top, left, nrows, ncols)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class ApplierReturn
       Hold all objects returned by the applier.apply() function. Some fields
@@ -35,8 +35,8 @@
               operations for pyramids (overviews), basic statistics, and
               histograms.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ApplierReturn.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ApplierReturn.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class BlockAssociations
       Container class to hold raster arrays for a single block.
@@ -58,8 +58,8 @@
       determines the structure of the object (i.e. the valid names and
       index values).
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockAssociations.\_\_init\_\_(self, fnameAssoc=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockAssociations.\_\_init\_\_(self, fnameAssoc=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class BlockBuffer
       Buffer of blocks of data which have been read in. Blocks
@@ -68,43 +68,43 @@
       within a given process, so includes locking mechanisms to
       make it thread-safe.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.\_\_init\_\_(self, filenameAssoc, numWorkers, insertTimeout, popTimeout, bufferTypeName)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.\_\_init\_\_(self, filenameAssoc, numWorkers, insertTimeout, popTimeout, bufferTypeName)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.addBlockData(self, blockDefn, name, seqNum, arr)
-        Use when building up blocks one array at a time
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.addBlockData(self, blockDefn, name, seqNum, arr)
+          Use when building up blocks one array at a time
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.insertCompleteBlock(self, blockDefn, blockData)
-        Use when inserting a complete BlockAssociations object at once
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.insertCompleteBlock(self, blockDefn, blockData)
+          Use when inserting a complete BlockAssociations object at once
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.popCompleteBlock(self, blockDefn)
-        Returns the BlockAssociations object for the given blockDefn,
-        and removes it from the buffer
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.popCompleteBlock(self, blockDefn)
+          Returns the BlockAssociations object for the given blockDefn,
+          and removes it from the buffer
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.popNextBlock(self)
-        Pop the next completed block from the buffer, without regard to
-        which block it is. Return a tuple of objects
-        
-            (ApplierBlockDefn, BlockAssociations)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.popNextBlock(self)
+          Pop the next completed block from the buffer, without regard to
+          which block it is. Return a tuple of objects
+          
+              (ApplierBlockDefn, BlockAssociations)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.timeoutName(self, timeoutType)
-        Deduce the name of the relevant timeout, using the
-        bufferTypeName given to the constructor, and the type of timeout
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.timeoutName(self, timeoutType)
+          Deduce the name of the relevant timeout, using the
+          bufferTypeName given to the constructor, and the type of timeout
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.waitCompletion(self, blockDefn, timeout=None)
-        Wait until the given block is complete
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBuffer.waitCompletion(self, blockDefn, timeout=None)
+          Wait until the given block is complete
 
 ### class BlockBufferValue
       Used to hold a BlockAssociations object, along with relevant information
       about its completeness, and locking to ensure thread-safety. An instance
       of this is used for each BlockAssociations object stored in a BlockBuffer.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBufferValue.\_\_init\_\_(self, filenameAssoc=None, blockData=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBufferValue.\_\_init\_\_(self, filenameAssoc=None, blockData=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBufferValue.addData(self, name, seqNum, arr)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBufferValue.addData(self, name, seqNum, arr)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; BlockBufferValue.complete(self)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BlockBufferValue.complete(self)
 
 ### class ConcurrencyStyle
       Class to hold all parameters associated with the different styles
@@ -269,8 +269,8 @@
           have had a chance to start, after which everything proceeds. The
           wait at this barrier will timeout after this many seconds.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ConcurrencyStyle.\_\_init\_\_(self, numReadWorkers=0, numComputeWorkers=0, computeWorkerKind='CW_NONE', computeWorkerExtraParams=None, computeWorkersRead=None, singleBlockComputeWorkers=False, haveSharedTemp=True, readBufferInsertTimeout=10, readBufferPopTimeout=10, computeBufferInsertTimeout=10, computeBufferPopTimeout=20, computeBarrierTimeout=600)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ConcurrencyStyle.\_\_init\_\_(self, numReadWorkers=0, numComputeWorkers=0, computeWorkerKind='CW_NONE', computeWorkerExtraParams=None, computeWorkersRead=None, singleBlockComputeWorkers=False, haveSharedTemp=True, readBufferInsertTimeout=10, readBufferPopTimeout=10, computeBufferInsertTimeout=10, computeBufferPopTimeout=20, computeBarrierTimeout=600)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class FilenameAssocIterator
       Separate class for the iterator of a FilenameAssociations object.
@@ -286,8 +286,8 @@
       iterating on a new instance of this class, and the original object is thus
       left untouched.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FilenameAssocIterator.\_\_init\_\_(self, infiles)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FilenameAssocIterator.\_\_init\_\_(self, infiles)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class FilenameAssociations
       Class for associating external image filenames with internal
@@ -364,27 +364,27 @@
       The server must be shut down correctly, and so the shutdown() method
       should always be called explicitly.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\_\_init\_\_(self, workerInitData=None, inBlockBuffer=None, outBlockBuffer=None, forceExit=None, exceptionQue=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\_\_init\_\_(self, workerInitData=None, inBlockBuffer=None, outBlockBuffer=None, forceExit=None, exceptionQue=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.addressStr(self)
-        Return a single string encoding the network address of this channel
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.addressStr(self)
+          Return a single string encoding the network address of this channel
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.shutdown(self)
-        Shut down the NetworkDataChannel in the right order. This should always
-        be called explicitly by the creator, when it is no longer
-        needed. If left to the garbage collector and/or the interpreter
-        exit code, things are shut down in the wrong order, and the
-        interpreter hangs on exit.
-        
-        I have tried __del__, also weakref.finalize and atexit.register,
-        and none of them avoid these problems. So, just make sure you
-        call shutdown explicitly, in the process which created the
-        NetworkDataChannel.
-        
-        The client processes don't seem to care, presumably because they
-        are not running the server thread. Calling shutdown on the client
-        does nothing.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.shutdown(self)
+          Shut down the NetworkDataChannel in the right order. This should always
+          be called explicitly by the creator, when it is no longer
+          needed. If left to the garbage collector and/or the interpreter
+          exit code, things are shut down in the wrong order, and the
+          interpreter hangs on exit.
+          
+          I have tried __del__, also weakref.finalize and atexit.register,
+          and none of them avoid these problems. So, just make sure you
+          call shutdown explicitly, in the process which created the
+          NetworkDataChannel.
+          
+          The client processes don't seem to care, presumably because they
+          are not running the server thread. Calling shutdown on the client
+          does nothing.
 
 ### class OtherInputs
       Generic object to store any extra inputs and outputs used 
@@ -403,18 +403,18 @@
       read workers within a single process. Not intended to be shared
       across compute workers on separate machines.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RasterizationMgr.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RasterizationMgr.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RasterizationMgr.rasterize(self, vectorfile, rasterizeOptions, tmpfileMgr)
-        Rasterize the given vector file, according to the given
-        rasterizeOptions.
-        
-        Return the name of the temporary raster file.
-        
-        This is thread-safe. Any other thread trying to rasterize the
-        same vector file will block until this has completed, and then
-        be given exactly the same temporary raster file.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RasterizationMgr.rasterize(self, vectorfile, rasterizeOptions, tmpfileMgr)
+          Rasterize the given vector file, according to the given
+          rasterizeOptions.
+          
+          Return the name of the temporary raster file.
+          
+          This is thread-safe. Any other thread trying to rasterize the
+          same vector file will block until this has completed, and then
+          be given exactly the same temporary raster file.
 
 ### class TempfileManager
       A single object which can keep track of all the temporary files
@@ -426,14 +426,14 @@
       Constructor takes a single string for tempdir. All subsequent
       temp files will be created in a subdirectory underneath this.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TempfileManager.\_\_init\_\_(self, tempdir)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TempfileManager.\_\_init\_\_(self, tempdir)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TempfileManager.cleanup(self)
-        Remove all the temp files created here
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TempfileManager.cleanup(self)
+          Remove all the temp files created here
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TempfileManager.mktempfile(self, prefix=None, suffix=None)
-        Make a new tempfile, and return the full name
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TempfileManager.mktempfile(self, prefix=None, suffix=None)
+          Make a new tempfile, and return the full name
 
 ### class Timers
       Manage multiple named timers. See interval() method for example
@@ -447,43 +447,43 @@
       The object is thread-safe, so multiple threads can accumulate to
       the same names. The object is also pickle-able.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.formatReport(self, level=0)
-        Format a simple report on the timing for the individual named
-        timers. Passing level=0 produces a simple report with mean values
-        for each named timer, level=1 adds some extra reporting summarizing
-        the distribution of durations for each named timer.
-        
-        Return as a formatted string
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.formatReport(self, level=0)
+          Format a simple report on the timing for the individual named
+          timers. Passing level=0 produces a simple report with mean values
+          for each named timer, level=1 adds some extra reporting summarizing
+          the distribution of durations for each named timer.
+          
+          Return as a formatted string
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.getDurationsForName(self, intervalName)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.getDurationsForName(self, intervalName)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.interval(self, intervalName)
-        Use as a context manager to time a particular named interval.
-        
-        Example::
-        
-            timings = Timers()
-            with timings.interval('some_action'):
-                # Code block required to perform the action
-        
-        After exit from the `with` statement, the timings object will have
-        accumulated the start and end times around the code block. These
-        will then contribute to the reporting of time intervals.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.interval(self, intervalName)
+          Use as a context manager to time a particular named interval.
+          
+          Example::
+          
+              timings = Timers()
+              with timings.interval('some_action'):
+                  # Code block required to perform the action
+          
+          After exit from the `with` statement, the timings object will have
+          accumulated the start and end times around the code block. These
+          will then contribute to the reporting of time intervals.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.makeSummaryDict(self)
-        Make some summary statistics, and return them in a dictionary
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.makeSummaryDict(self)
+          Make some summary statistics, and return them in a dictionary
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.merge(self, other)
-        Merge another Timers object into this one
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.merge(self, other)
+          Merge another Timers object into this one
 
 ### class WorkerErrorRecord
       Hold a record of an exception raised in a remote worker.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; WorkerErrorRecord.\_\_init\_\_(self, exc, workerType, workerID=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WorkerErrorRecord.\_\_init\_\_(self, exc, workerType, workerID=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Values
     CW_AWSBATCH = 'CW_AWSBATCH'

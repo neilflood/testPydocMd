@@ -32,19 +32,15 @@
       tickets #4750 and #5289. )
           
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ColumnStats.__findColumnNdx(gdalRat, columnName)
-        Utility routine to find the column index for the given column name, in 
-        the given gdalRat
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; ColumnStats.\_\_init\_\_(self, band, columnName, includeImageNull=False, histogramweighted=True)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ColumnStats.\_\_init\_\_(self, band, columnName, includeImageNull=False, histogramweighted=True)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class ImageFileStats
       Hold the stats for all layers in an image file. This object can be indexed 
       with the layer index, and each element is an instance of :class:`rios.fileinfo.ImageLayerStats`. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageFileStats.\_\_init\_\_(self, filename)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageFileStats.\_\_init\_\_(self, filename)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class ImageInfo
       An object with the bounds and other info for the given image, 
@@ -75,35 +71,35 @@
       setting omitPerBand=True will omit that information, but will return as quickly 
       as for a normal single file. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.\_\_init\_\_(self, filename, omitPerBand=False)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.\_\_init\_\_(self, filename, omitPerBand=False)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.getCorners(self, outWKT=None, outEPSG=None, outPROJ4=None)
-        Return the coordinates of the image corners, possibly reprojected. 
-        
-        This is the same information as in the xMin, xMax, yMin, yMax fields, 
-        but with the option to reproject them into a given output projection. 
-        Because the output coordinate system will not in general align with the 
-        image coordinate system, there are separate values for all four corners. 
-        These are returned as::
-        
-            (ul_x, ul_y, ur_x, ur_y, lr_x, lr_y, ll_x, ll_y)
-            
-        The output projection can be given as either a WKT string, an 
-        EPSG number, or a PROJ4 string. If none of those is given, then 
-        bounds are not reprojected, but will be in the same coordinate 
-        system as the image corners. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.getCorners(self, outWKT=None, outEPSG=None, outPROJ4=None)
+          Return the coordinates of the image corners, possibly reprojected. 
+          
+          This is the same information as in the xMin, xMax, yMin, yMax fields, 
+          but with the option to reproject them into a given output projection. 
+          Because the output coordinate system will not in general align with the 
+          image coordinate system, there are separate values for all four corners. 
+          These are returned as::
+          
+              (ul_x, ul_y, ur_x, ur_y, lr_x, lr_y, ll_x, ll_y)
+              
+          The output projection can be given as either a WKT string, an 
+          EPSG number, or a PROJ4 string. If none of those is given, then 
+          bounds are not reprojected, but will be in the same coordinate 
+          system as the image corners. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.layerNameFromNumber(self, layerNumber)
-        Return the layer name corresponding to the given layer number. 
-        Valid layer numbers are as per GDAL conventions, i.e. starting at 1.
-        If the given layer number is not valid for this file info, an exception is 
-        raised. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.layerNameFromNumber(self, layerNumber)
+          Return the layer name corresponding to the given layer number. 
+          Valid layer numbers are as per GDAL conventions, i.e. starting at 1.
+          If the given layer number is not valid for this file info, an exception is 
+          raised. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.layerNumberFromName(self, layerName)
-        Return the layer number corresponding to the given layer name.
-        Valid layer numbers are as per GDAL conventions, i.e. starting at 1. 
-        If the given layer name is not found in this file info, then zero is returned. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageInfo.layerNumberFromName(self, layerName)
+          Return the layer number corresponding to the given layer name.
+          Valid layer numbers are as per GDAL conventions, i.e. starting at 1. 
+          If the given layer name is not found in this file info, then zero is returned. 
 
 ### class ImageLayerStats
       Hold the stats for a single image layer. These are as retrieved
@@ -132,11 +128,8 @@
           * **histoNumBins**    Number of histogram bins
           
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageLayerStats.__getMetadataItem(metadata, key)
-        Return eval(item) by key, or None if not present
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageLayerStats.\_\_init\_\_(self, bandObj)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageLayerStats.\_\_init\_\_(self, bandObj)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class RatStats
       Calculate statistics on columns in a Raster Attribute Table
@@ -152,16 +145,16 @@
       a ColumnStats object, containing all relevant global stats 
       for that column. See docstring for that class for details. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatStats.\_\_init\_\_(self, filename, columnlist=None, layernum=1, includeImageNull=False, histogramweighted=True)
-        Default columnlist is all columns in the table. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatStats.\_\_init\_\_(self, filename, columnlist=None, layernum=1, includeImageNull=False, histogramweighted=True)
+          Default columnlist is all columns in the table. 
 
 ### class VectorFileInfo
       Hold useful general information about a vector file. This object
       can be indexed with the layer index, and each element is
       an instance of :class:`rios.fileinfo.VectorLayerInfo`. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; VectorFileInfo.\_\_init\_\_(self, filename)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VectorFileInfo.\_\_init\_\_(self, filename)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class VectorLayerInfo
       Hold useful general information about a single vector layer. 
@@ -180,8 +173,8 @@
           * **fieldTypeNames**      List of the string names of the field types
           * **spatialRef**          osr.SpatialReference object of layer projection
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; VectorLayerInfo.\_\_init\_\_(self, ds, i)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VectorLayerInfo.\_\_init\_\_(self, ds, i)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def preventGdal3axisSwap(sr)

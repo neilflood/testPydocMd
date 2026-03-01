@@ -26,5 +26,5 @@
     CW_THREADS = 'CW_THREADS'
     RIOS_VERSION = '2.0.9'
     collection = 'sentinel-2-l2a'
-    numbaMedian = CPUDispatcher(<function numbaMedian at 0x7288be2c9940>)
+    numbaMedian = CPUDispatcher(<function numbaMedian at 0x72acba195a80>)
     stacServer = 'https://earth-search.aws.element84.com/v1/'

@@ -9,8 +9,8 @@
       The inferences are based on the pixel datatype. Some (but not all) of the
       parameters are also used when doing a single-pass histogram.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramParams.\_\_init\_\_(self, band, minval, maxval)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramParams.\_\_init\_\_(self, band, minval, maxval)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class ProgressUserData
 
@@ -18,39 +18,39 @@
       Accumulator for statistics and histogram for a single band. Used when
       doing single-pass stats and/or histogram.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.\_\_init\_\_(self, includeStats, includeHist, dtype, nullval, thematic)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.\_\_init\_\_(self, includeStats, includeHist, dtype, nullval, thematic)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.addTwoHistograms(hist1, hist2)
-        Add the two given histograms together, and return the result.
-        
-        If one is longer than the other, the shorter one is added to it.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.addTwoHistograms(hist1, hist2)
+          Add the two given histograms together, and return the result.
+          
+          If one is longer than the other, the shorter one is added to it.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.doHistAccum(self, arr)
-        Accumulate the histogram with counts from the given arr. For signed
-        int types, maintain two separate count arrays, one for positive
-        values and one for negatives. This is due to using numpy.bincount()
-        to do the counting.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.doHistAccum(self, arr)
+          Accumulate the histogram with counts from the given arr. For signed
+          int types, maintain two separate count arrays, one for positive
+          values and one for negatives. This is due to using numpy.bincount()
+          to do the counting.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.doStatsAccum(self, arr)
-        Accumulate basic stats for the given array
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.doStatsAccum(self, arr)
+          Accumulate basic stats for the given array
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.finalStats(self)
-        Return the final values of the four basic statistics
-        (minval, maxval, mean, stddev)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.finalStats(self)
+          Return the final values of the four basic statistics
+          (minval, maxval, mean, stddev)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.fullHist(self)
-        Return the full histogram, as (minval, maxval, counts)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.fullHist(self)
+          Return the full histogram, as (minval, maxval, counts)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.removeNullFromCounts(counts, nullval)
-        The counts will include a count for the null value. Set this to zero,
-        and if it is at the end of the count array, truncate this back to
-        the next biggest non-zero count.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.removeNullFromCounts(counts, nullval)
+          The counts will include a count for the null value. Set this to zero,
+          and if it is at the end of the count array, truncate this back to
+          the next biggest non-zero count.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.updateHist(self, newCounts, positive)
-        Update the current histogram counts. If positive is True, then
-        the counts for positive values are updated, otherwise those for the
-        negative values are updated.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassAccumulator.updateHist(self, newCounts, positive)
+          Update the current histogram counts. If positive is True, then
+          the counts for positive values are updated, otherwise those for the
+          negative values are updated.
 
 ### class SinglePassManager
       The required info for dealing with single-pass pyramids/statistics/histogram.
@@ -64,31 +64,31 @@
       When this is not possible, or has been explicitly disabled, then it will
       fall back to using GDAL's methods, after the whole raster has been written.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.\_\_init\_\_(self, outfiles, controls, workinggrid, tmpfileMgr)
-        Check whether single-pass is appropriate and/or supported for
-        all output files.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.\_\_init\_\_(self, outfiles, controls, workinggrid, tmpfileMgr)
+          Check whether single-pass is appropriate and/or supported for
+          all output files.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.checkDriverPyramidSupport(self, outfiles, controls, tmpfileMgr)
-        For all the format drivers being used for output, check whether they
-        support direct writing of pyramid layers. Return a dictionary keyed
-        by driver name, with boolean values.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.checkDriverPyramidSupport(self, outfiles, controls, tmpfileMgr)
+          For all the format drivers being used for output, check whether they
+          support direct writing of pyramid layers. Return a dictionary keyed
+          by driver name, with boolean values.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.doSinglePassHistogram(self, symbolicName)
-        Return True if we should do single-pass histogram, False
-        otherwise, based on what has been requested, the datatype of
-        the raster.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.doSinglePassHistogram(self, symbolicName)
+          Return True if we should do single-pass histogram, False
+          otherwise, based on what has been requested, the datatype of
+          the raster.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.doSinglePassPyramids(self, symbolicName)
-        Return True if we should do single-pass pyramids layers, False
-        otherwise. Decision depends on choices for omitPyramids,
-        singlePassPyramids, and overviewAggType.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.doSinglePassPyramids(self, symbolicName)
+          Return True if we should do single-pass pyramids layers, False
+          otherwise. Decision depends on choices for omitPyramids,
+          singlePassPyramids, and overviewAggType.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.doSinglePassStatistics(self, symbolicName)
-        Return True if we should do single-pass basic statistics, False
-        otherwise.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.doSinglePassStatistics(self, symbolicName)
+          Return True if we should do single-pass basic statistics, False
+          otherwise.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.initFor(self, ds, symbolicName, seqNum, arr)
-        Initialise for the given output file
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SinglePassManager.initFor(self, ds, symbolicName, seqNum, arr)
+          Initialise for the given output file
 
 ## Functions
 ### def addBasicStatsGDAL(ds, approx_ok)

@@ -2,103 +2,103 @@
     All exceptions used within rios. 
 
 ## Classes
-### class ArrayShapeError
+### class ArrayShapeError(RiosError)
       Error in shape of an array
 
-### class AttributeTableColumnError
+### class AttributeTableColumnError(RiosError)
       Unable to find specified column
 
-### class AttributeTableTypeError
+### class AttributeTableTypeError(RiosError)
       Type does not match that expected
 
-### class ColorTableGenerationError
+### class ColorTableGenerationError(RiosError)
       Error generating a color table
 
-### class ECSError
+### class ECSError(RiosError)
       Error arising from AWS ECS
 
-### class FileOpenError
+### class FileOpenError(RiosError)
       Failed to open an input or output file
 
-### class GDALLayerNumberError
+### class GDALLayerNumberError(RiosError)
       A GDAL layer number was given, but was out of range
 
-### class GdalWarpError
+### class GdalWarpError(RiosError)
       Error while running gdalwarp
 
-### class ImageOpenError
+### class ImageOpenError(FileOpenError)
       Image wasn't able to be opened by GDAL
 
-### class IntersectionError
+### class IntersectionError(RiosError)
       Images don't have a common area
 
-### class JobMgrError
+### class JobMgrError(RiosError)
       Errors from Jobmanager class
 
-### class KeysMismatch
+### class KeysMismatch(RiosError)
       Keys do not match expected
 
-### class MismatchedListLengthsError
+### class MismatchedListLengthsError(RiosError)
       Two lists had different lengths, when they were supposed to be the same length
 
-### class OutsideImageBoundsError
+### class OutsideImageBoundsError(RiosError)
       Requested Block is not available
 
-### class ParameterError
+### class ParameterError(RiosError)
       Incorrect parameters passed to function
 
-### class PermissionError
+### class PermissionError(RiosError)
       Error due to permissions on temp files
 
-### class ProcessCancelledError
+### class ProcessCancelledError(RiosError)
       Process was cancelled by user
 
-### class RatBlockLengthError
+### class RatBlockLengthError(RiosError)
       Error with RAT block length, in ratapplier
 
-### class RatMismatchError
+### class RatMismatchError(RiosError)
       Inconsistent RATs on inputs to ratapplier
 
-### class ResampleNeededError
+### class ResampleNeededError(RiosError)
       Images do not match - resample needs to be turned on
 
-### class RiosError
+### class RiosError(Exception)
       Base class for RIOS exceptions
 
-### class SinglePassActionsError
+### class SinglePassActionsError(RiosError)
       An error in processing single-pass actions
 
-### class ThematicError
+### class ThematicError(RiosError)
       File unable to be set to thematic
 
-### class TimeoutError
+### class TimeoutError(RiosError)
       Something timed out
 
-### class TypeConversionError
+### class TypeConversionError(RiosError)
       Unknown type conversion
 
-### class UnavailableError
+### class UnavailableError(RiosError)
       A dependency is unavailable
 
-### class VectorAttributeError
+### class VectorAttributeError(RiosError)
       Unable to find specified index in vector file
 
-### class VectorGeometryTypeError
+### class VectorGeometryTypeError(RiosError)
       Unexpected Geometry type
 
-### class VectorLayerError
+### class VectorLayerError(RiosError)
       Unable to find the specified layer
 
-### class VectorProjectionError
+### class VectorProjectionError(RiosError)
       Vector projection does not match raster projection
 
-### class VectorRasterizationError
+### class VectorRasterizationError(RiosError)
       Rasterisation of Vector dataset failed
 
-### class WorkerExceptionError
+### class WorkerExceptionError(RiosError)
       A worker thread or process has raised an exception
 
-### class WrongControlsObject
+### class WrongControlsObject(RiosError)
       The wrong type of control object has been passed to apply
 
 ## Functions

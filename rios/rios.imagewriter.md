@@ -37,69 +37,69 @@
       
           writer.close(calcStats=True)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.\_\_init\_\_(self, filename, drivername='HFA', creationoptions=None, nbands=None, gdaldatatype=None, firstblock=None, info=None, xsize=None, ysize=None, transform=None, projection=None, windowxsize=None, windowysize=None, overlap=None)
-        filename is the output file to be created. Set driver to name of
-        GDAL driver, default it HFA. creationoptions will also need to be
-        set if not using HFA since the default probably does not make sense
-        for other drivers.
-        
-        Either pass nbands and gdaldatatype OR firstblock. If you pass 
-        firstblock, nbands and gdaldataype will be determined from that block
-        and that block written to file.
-        
-        Also, either pass info (the first argument returned from each iteration
-        through ImageReader, generally create this class on the first iteration)
-        or xsize, ysize, transform, projection, windowxsize, windowysize and overlap
-        If you pass info, these other values will be determined from that
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.\_\_init\_\_(self, filename, drivername='HFA', creationoptions=None, nbands=None, gdaldatatype=None, firstblock=None, info=None, xsize=None, ysize=None, transform=None, projection=None, windowxsize=None, windowysize=None, overlap=None)
+          filename is the output file to be created. Set driver to name of
+          GDAL driver, default it HFA. creationoptions will also need to be
+          set if not using HFA since the default probably does not make sense
+          for other drivers.
+          
+          Either pass nbands and gdaldatatype OR firstblock. If you pass 
+          firstblock, nbands and gdaldataype will be determined from that block
+          and that block written to file.
+          
+          Also, either pass info (the first argument returned from each iteration
+          through ImageReader, generally create this class on the first iteration)
+          or xsize, ysize, transform, projection, windowxsize, windowysize and overlap
+          If you pass info, these other values will be determined from that
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.addAutoColorTable(self, autoColorTableType)
-        If autoColorTable has been set up for this output, then generate
-        a color table of the requested type, and add it to the current
-        file. This is called AFTER the Dataset has been closed, so is performed on
-        the filename. This only applies to thematic layers, so when we open the file
-        and find that the layers are athematic, we do nothing. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.addAutoColorTable(self, autoColorTableType)
+          If autoColorTable has been set up for this output, then generate
+          a color table of the requested type, and add it to the current
+          file. This is called AFTER the Dataset has been closed, so is performed on
+          the filename. This only applies to thematic layers, so when we open the file
+          and find that the layers are athematic, we do nothing. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.close(self, calcStats=False, statsIgnore=None, progress=None, omitPyramids=False, overviewLevels=[4, 8, 16, 32, 64, 128, 256, 512], overviewMinDim=128, overviewAggType=None, autoColorTableType=None, approx_ok=False)
-        Closes the open dataset
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.close(self, calcStats=False, statsIgnore=None, progress=None, omitPyramids=False, overviewLevels=[4, 8, 16, 32, 64, 128, 256, 512], overviewMinDim=128, overviewAggType=None, autoColorTableType=None, approx_ok=False)
+          Closes the open dataset
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.deleteIfExisting(filename)
-        Delete the filename if it already exists.
-        If possible, use the appropriate GDAL driver to do so, to ensure
-        that any associated files will also be deleted. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.deleteIfExisting(filename)
+          Delete the filename if it already exists.
+          If possible, use the appropriate GDAL driver to do so, to ensure
+          that any associated files will also be deleted. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.doubleCheckCreationOptions(self, drivername, creationoptions)
-        Try to ensure that the given creation options are not incompatible with RIOS
-        operations. Does not attempt to ensure they are totally valid, as that is GDAL's
-        job. 
-        
-        Returns a copy of creationoptions, possibly modified, or raises ImageOpenError
-        in cases where the problem is not fixable. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.doubleCheckCreationOptions(self, drivername, creationoptions)
+          Try to ensure that the given creation options are not incompatible with RIOS
+          operations. Does not attempt to ensure they are totally valid, as that is GDAL's
+          job. 
+          
+          Returns a copy of creationoptions, possibly modified, or raises ImageOpenError
+          in cases where the problem is not fixable. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.getCurrentBlock(self)
-        Returns the number of the current block
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.getCurrentBlock(self)
+          Returns the number of the current block
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.getGDALDataset(self)
-        Returns the underlying GDAL dataset object
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.getGDALDataset(self)
+          Returns the underlying GDAL dataset object
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.reset(self)
-        Resets the location pointer so that the next
-        write() call writes to the start of the file again
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.reset(self)
+          Resets the location pointer so that the next
+          write() call writes to the start of the file again
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.setLayerNames(self, names)
-        Sets the output layer names. Pass a list
-        of layer names, one for each output band
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.setLayerNames(self, names)
+          Sets the output layer names. Pass a list
+          of layer names, one for each output band
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.setThematic(self)
-        Sets the output file to thematic. If file is multi-layer,
-        then all bands are set to thematic. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.setThematic(self)
+          Sets the output file to thematic. If file is multi-layer,
+          then all bands are set to thematic. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.write(self, block)
-        Writes the numpy block to the current location in the file,
-        and updates the location pointer for next write
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.write(self, block)
+          Writes the numpy block to the current location in the file,
+          and updates the location pointer for next write
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.writeAt(self, block, xcoord, ycoord)
-        writes the numpy block to the specified pixel coords
-        in the file
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ImageWriter.writeAt(self, block, xcoord, ycoord)
+          writes the numpy block to the specified pixel coords
+          in the file
 
 ## Functions
 ### def addAutoColorTable(filename, autoColorTableType)

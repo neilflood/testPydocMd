@@ -18,10 +18,10 @@
     Raster Attribute Table functions. 
 
 ## Classes
-### class ColorTableException
+### class ColorTableException(Exception)
       Exception for errors related to color table access
 
-### class ColorTableMissingException
+### class ColorTableMissingException(ColorTableException)
       Exception for errors related to errors reading color table
 
 ### class str

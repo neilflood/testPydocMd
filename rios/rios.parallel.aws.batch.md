@@ -104,50 +104,30 @@
      
 
 ## Classes
-### class AWSBatchException
+### class AWSBatchException(Exception)
       Common base class for all non-exit exceptions.
 
-### class AWSBatchJobManager
+### class AWSBatchJobManager(JobManager)
       Implementation of parallelisation via AWS Batch.
       This uses 2 SQS queues for communication between the
       'main' RIOS script and the subprocesses (which run on Batch)
       and an S3 bucket to hold the pickled data (which the SQS
       messages refer to).
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.\_\_init\_\_(self, numSubJobs)
-        numSubJobs is the number of sub-jobs
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.\_\_init\_\_(self, numSubJobs)
+          numSubJobs is the number of sub-jobs
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.finalise(self)
-        Stop our AWS Batch jobs by sending a special message to the queue
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.finalise(self)
+          Stop our AWS Batch jobs by sending a special message to the queue
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.gatherAllOutputs(self, jobIDlist)
-        Gather all the results. Checks the output SQS Queue
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.gatherAllOutputs(self, jobIDlist)
+          Gather all the results. Checks the output SQS Queue
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.runSubJobs(self, function, fnInputs)
-        Take the given list of function arguments, run the given function 
-        for each one, as a separate asynchronous job. 
-        
-        Returns a list of output BlockAssociations.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.startOneJob(self, userFunc, jobInfo)
+          Start one sub job
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.setTempdir(self, tempdir)
-        Directory to use for temporary files. This is generally set by apply(),
-        using the one it has been given on the ApplierControls object. The
-        default is '.'. 
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.startAllJobs(self, function, jobInputs)
-        Start up all of the jobs processing blocks. Default implementation
-        loops over the lists of jobs, starting each job separately. Keeps the
-        first job aside, and runs it here before going off to wait for 
-        the others. This means that the first element in the jobID list is not
-        a jobID, but the results of the first sub-job. 
-        
-        jobInputs should be a list of JobInfo derived objects.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.startOneJob(self, userFunc, jobInfo)
-        Start one sub job
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.waitOnJobs(self, jobIDlist)
-        Wait on all the jobs. Do nothing.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AWSBatchJobManager.waitOnJobs(self, jobIDlist)
+          Wait on all the jobs. Do nothing.
 
 ## Functions
 ### def getStackOutputs()

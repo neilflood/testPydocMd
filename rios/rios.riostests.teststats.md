@@ -4,8 +4,8 @@
 ## Classes
 ### class Stats
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Stats.\_\_init\_\_(self, mean, stddev, minval, maxval, median, mode)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Stats.\_\_init\_\_(self, mean, stddev, minval, maxval, median, mode)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def calcMode(a, axis=0)
