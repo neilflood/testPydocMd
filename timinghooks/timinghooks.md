@@ -2,6 +2,19 @@
     A class to support placement of timing points in a Python application.
 
 ## Classes
+### class AllTests(TestCase)
+      Run all tests
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AllTests.\_\_init\_\_(self, methodName='runTest')
+          Create an instance of the class that will use the named test
+          method when executed. Raises a ValueError if the instance does
+          not have a method with the specified name.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AllTests.test_multiple(self)
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AllTests.test_nested(self)
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AllTests.test_single(self)
 
 ### class Timers
       Manage multiple named timers. See interval() method for example
@@ -52,33 +65,33 @@
       used to generate a report at the end of the application to present to a
       user, showing how the key parts of the application compare in time taken.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.getDurationsForName(self, intervalName)
-        For the given interval name, turns that list of start/end times
-        into a list of durations (end - start), in seconds.
-        
-        Returns the list of durations.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.getDurationsForName(self, intervalName)
+          For the given interval name, turns that list of start/end times
+          into a list of durations (end - start), in seconds.
+          
+          Returns the list of durations.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.interval(self, intervalName)
-        Use as a context manager to time a particular named interval.
-        
-        Example::
-        
-            timings = Timers()
-            with timings.interval('some_action'):
-                # Code block required to perform the action
-        
-        After exit from the `with` statement, the timings object will have
-        accumulated the start and end times around the code block. These
-        will then contribute to the reporting of time intervals.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.interval(self, intervalName)
+          Use as a context manager to time a particular named interval.
+          
+          Example::
+          
+              timings = Timers()
+              with timings.interval('some_action'):
+                  # Code block required to perform the action
+          
+          After exit from the `with` statement, the timings object will have
+          accumulated the start and end times around the code block. These
+          will then contribute to the reporting of time intervals.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.makeSummaryDict(self)
-        Make some summary statistics, and return them in a dictionary
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.makeSummaryDict(self)
+          Make some summary statistics, and return them in a dictionary
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; Timers.merge(self, other)
-        Merge another Timers object into this one
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Timers.merge(self, other)
+          Merge another Timers object into this one
 
 ## Functions
 ### def mainCmd()
