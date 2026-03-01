@@ -2,7 +2,7 @@
     Command line tool to view processing history in simple text form.
 
 ## Classes
-### class HistoryviewTextError
+### class HistoryviewTextError(Exception)
       Common base class for all non-exit exceptions.
 
 ## Functions

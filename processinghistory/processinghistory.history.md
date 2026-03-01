@@ -43,24 +43,24 @@
 ### class ProcessingHistory
       Hold whole all ancestry and metadata for a single file
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.addParentHistory(self, parentfile)
-        Add history from parent file to self
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.addParentHistory(self, parentfile)
+          Add history from parent file to self
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.findKeyByFile(self, filename)
-        Return a list of all full keys from self.metadataByKey which match the
-        given filename. Normally this is just a single key, so the list has
-        only one element, but this should be checked.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.findKeyByFile(self, filename)
+          Return a list of all full keys from self.metadataByKey which match the
+          given filename. Normally this is just a single key, so the list has
+          only one element, but this should be checked.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.fromJSON(jsonStr)
-        Return a ProcessingHistory object from the given JSON string
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.fromJSON(jsonStr)
+          Return a ProcessingHistory object from the given JSON string
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.toJSON(self)
-        Return a JSON representation of the current ProcessingHistory
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProcessingHistory.toJSON(self)
+          Return a JSON representation of the current ProcessingHistory
 
-### class ProcessingHistoryError
+### class ProcessingHistoryError(Exception)
       Generic exception for ProcessingHistory
 
 ## Functions
