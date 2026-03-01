@@ -4,7 +4,7 @@
     :func:`subsetImage`.
 
 ## Classes
-### class PyShepSegSubsetError
+### class PyShepSegSubsetError(Exception)
       Common base class for all non-exit exceptions.
 
 ## Functions
@@ -77,8 +77,8 @@
             The paged RAT in memory, as created by createPagedRat()
 
 ## Values
-    copySubsettedSegmentsToNew = CPUDispatcher(<function copySubsettedSegmentsToNew at 0x7d072b325120>)
-    processSubsetTile = CPUDispatcher(<function processSubsetTile at 0x7d072b325ee0>)
-    readColDataIntoPage = CPUDispatcher(<function readColDataIntoPage at 0x7d072b3258a0>)
-    setHistogramFromDictionary = CPUDispatcher(<function setHistogramFromDictionary at 0x7d072b3251c0>)
-    setSubsetRecodeFromDictionary = CPUDispatcher(<function setSubsetRecodeFromDictionary at 0x7d072b325580>)
+    copySubsettedSegmentsToNew = CPUDispatcher(<function copySubsettedSegmentsToNew at 0x7e6aec229260>)
+    processSubsetTile = CPUDispatcher(<function processSubsetTile at 0x7e6aec22a020>)
+    readColDataIntoPage = CPUDispatcher(<function readColDataIntoPage at 0x7e6aec2299e0>)
+    setHistogramFromDictionary = CPUDispatcher(<function setHistogramFromDictionary at 0x7e6aec229300>)
+    setSubsetRecodeFromDictionary = CPUDispatcher(<function setSubsetRecodeFromDictionary at 0x7e6aec2296c0>)

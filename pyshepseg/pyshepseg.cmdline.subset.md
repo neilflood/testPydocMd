@@ -16,7 +16,7 @@
 ### def main()
 
 ## Values
-    DFLT_OUTPUT_DRIVER = KEA
+    DFLT_OUTPUT_DRIVER = 'KEA'
     GDAL_DRIVER_CREATION_OPTIONS = {'KEA': [], 'HFA': ['COMPRESS=YES']}
     division = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)
     print_function = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 1048576)

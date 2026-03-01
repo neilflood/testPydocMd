@@ -77,8 +77,8 @@
           the ECS cluster, task definition and tasks. The keys and values
           must all be strings. Requires ``ecs:TagResource`` permission.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; FargateConfig.\_\_init\_\_(self, containerImage=None, taskRoleArn=None, executionRoleArn=None, subnet=None, securityGroups=None, cpu='0.5 vCPU', memory='1GB', cpuArchitecture=None, cloudwatchLogGroup=None, tags=None)
-        AWS Fargate configuration information. For use only with CONC_FARGATE.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FargateConfig.\_\_init\_\_(self, containerImage=None, taskRoleArn=None, executionRoleArn=None, subnet=None, securityGroups=None, cpu='0.5 vCPU', memory='1GB', cpuArchitecture=None, cloudwatchLogGroup=None, tags=None)
+          AWS Fargate configuration information. For use only with CONC_FARGATE.
 
 ### class HistogramAccumulator
       Accumulator for histogram for the output segmentation image. This
@@ -86,21 +86,21 @@
       Note that there are simplifying assumptions about being uint32, and
       the null value being zero, so don't try to use this for anything else.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.addTwoHistograms(hist1, hist2)
-        Add the two given histograms together, and return the result.
-        
-        If one is longer than the other, the shorter one is added to it.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.addTwoHistograms(hist1, hist2)
+          Add the two given histograms together, and return the result.
+          
+          If one is longer than the other, the shorter one is added to it.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.doHistAccum(self, arr)
-        Accumulate the histogram with counts from the given arr.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.doHistAccum(self, arr)
+          Accumulate the histogram with counts from the given arr.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.updateHist(self, newCounts)
-        Update the current histogram counts. If positive is True, then
-        the counts for positive values are updated, otherwise those for the
-        negative values are updated.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.updateHist(self, newCounts)
+          Update the current histogram counts. If positive is True, then
+          the counts for positive values are updated, otherwise those for the
+          negative values are updated.
 
 ### class NetworkDataChannel
       Single class to manage communication with workers running on different
@@ -109,946 +109,124 @@
       Created from either the server or the client end, the constructor
       takes 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\_\_init\_\_(self, inQue=None, segResultCache=None, forceExit=None, exceptionQue=None, segDataDict=None, readSemaphore=None, timings=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\_\_init\_\_(self, inQue=None, segResultCache=None, forceExit=None, exceptionQue=None, segDataDict=None, readSemaphore=None, timings=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.addressStr(self)
-        Return a single string encoding the network address of this channel
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.addressStr(self)
+          Return a single string encoding the network address of this channel
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.shutdown(self)
-        Shut down the NetworkDataChannel in the right order. This should always
-        be called explicitly by the creator, when it is no longer
-        needed. If left to the garbage collector and/or the interpreter
-        exit code, things are shut down in the wrong order, and the
-        interpreter hangs on exit.
-        
-        I have tried __del__, also weakref.finalize and atexit.register,
-        and none of them avoid these problems. So, just make sure you
-        call shutdown explicitly, in the process which created the
-        NetworkDataChannel.
-        
-        The client processes don't seem to care, presumably because they
-        are not running the server thread. Calling shutdown on the client
-        does nothing.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.shutdown(self)
+          Shut down the NetworkDataChannel in the right order. This should always
+          be called explicitly by the creator, when it is no longer
+          needed. If left to the garbage collector and/or the interpreter
+          exit code, things are shut down in the wrong order, and the
+          interpreter hangs on exit.
+          
+          I have tried __del__, also weakref.finalize and atexit.register,
+          and none of them avoid these problems. So, just make sure you
+          call shutdown explicitly, in the process which created the
+          NetworkDataChannel.
+          
+          The client processes don't seem to care, presumably because they
+          are not running the server thread. Calling shutdown on the client
+          does nothing.
 
-### class PyShepSegTilingError
+### class PyShepSegTilingError(Exception)
       Common base class for all non-exit exceptions.
 
-### class SegFargateMgr
+### class SegFargateMgr(SegmentationConcurrencyMgr)
       Run tiled segmentation with concurrency based on AWS Fargate workers.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
-        Constructor. Just saves all its arguments to self, and does a couple
-        of quick checks.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+          Constructor. Just saves all its arguments to self, and does a couple
+          of quick checks.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.checkForEmptySegments(self, hist, overlapSize)
-        Check the final segmentation for any empty segments. These
-        can be problematic later, and should be avoided. Prints a
-        warning message if empty segments are found.
-        
-        Parameters
-        ----------
-          hist : ndarray of uint32
-            Histogram counts for the segmentation raster
-          overlapSize : int
-            Number of pixels to use in overlaps between tiles
-        
-        Returns
-        -------
-          hasEmptySegments : bool
-            True if there are segment ID numbers with no pixels
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.checkTaskErrors(self)
+          Check for errors reported via describe_tasks(). This mechanism
+          seems rather unreliable, particularly when reporting the 'reason',
+          but I am doing my best.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.checkTaskErrors(self)
-        Check for errors reported via describe_tasks(). This mechanism
-        seems rather unreliable, particularly when reporting the 'reason',
-        but I am doing my best.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.getClusterTaskCount(self)
+          Query the cluster, and return the number of tasks it has.
+          This is the total of running and pending tasks.
+          If the cluster does not exist, return None.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.checkWorkerExceptions(self)
-        Check if any workers raised exceptions. If so, raise a local exception
-        with the WorkerErrorRecord.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.shutdown(self)
+          Shut down the workers and data channel
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.crossesMidline(overlap, segLoc, orientation)
-        Check whether the given segment crosses the midline of the
-        given overlap. If it does not, then it will lie entirely within
-        exactly one tile, but if it does cross, then it will need to be
-        re-coded across the midline.
-        
-        Parameters
-        ----------
-          overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Array of segments just for this overlap region
-          segLoc : shepseg.RowColArray
-            The row/col coordinates (within the overlap array) of the
-            pixels for the segment of interest
-          orientation : {HORIZONTAL, VERTICAL}
-            Indicates the orientation of the midline
-        
-        Returns
-        -------
-          crosses : bool
-            True if the given segment crosses the midline
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.specificChecks(self)
+          Initial checks which are specific to the subclass
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.getClusterTaskCount(self)
-        Query the cluster, and return the number of tasks it has.
-        This is the total of running and pending tasks.
-        If the cluster does not exist, return None.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.startWorkers(self)
+          Start all segmentation workers as AWS Fargate tasks
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.getTileSegmentation(self, col, row)
-        Get the segmented tile output data from the local cache, and remove it
-        from the cache
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.waitClusterTasksFinished(self)
+          Poll the given cluster until the number of tasks reaches zero
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.initialize(self)
-        Runs initial phase of segmentation. This does not have any concurrency,
-        so is the same for every concurrencyType. The main job is to do the
-        spectral clustering, setting self.kmeansObj
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.loadOverlap(self, overlapCacheKey)
-        Load the requested overlap from cache, and remove it from cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.overlapCacheKey(col, row, edge)
-        Return the temporary cache key used for the overlap array
-        
-        Parameters
-        ----------
-          col, row : int
-            Tile column & row numbers
-          edge : {right', 'bottom'}
-            Indicates from which edge of the given tile the overlap is taken
-        
-        Returns
-        -------
-          cachekey : str
-            Identifying key for the overlap
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.popFromQue(que)
-        Pop out the next item from the given Queue, returning None if
-        the queue is empty.
-        
-        WARNING: don't use this if the queued items can be None
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
-        Work out a mapping which recodes segment ID numbers from
-        the tile in tileData. Segments to be recoded are those which 
-        are in the overlap with an earlier tile, and which cross the 
-        midline of the overlap, which is where the stitchline between 
-        the tiles will fall. 
-        
-        Updates recodeDict, which is a dictionary keyed on the 
-        existing segment ID numbers, where the value of each entry 
-        is the segment ID number from the earlier tile, to be used 
-        to recode the segment in the current tile. 
-        
-        overlapA and overlapB are numpy arrays of pixels in the overlap
-        region in question, giving the segment ID numbers in the two tiles.
-        The values in overlapB are from the earlier tile, and those in
-        overlapA are from the current tile.
-        
-        It is critically important that the overlapping region is either
-        at the top or the left of the current tile, as this means that 
-        the row and column numbers of pixels in the overlap arrays 
-        match the same pixels in the full tile. This cannot be used
-        for overlaps on the right or bottom of the current tile.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Tile subset of segment ID image
-          overlapA, overlapB : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Tile overlap subsets of segment ID image
-          orientation : {HORIZONTAL, VERTICAL}
-            The orientation parameter defines whether we are dealing with
-            overlap at the top (orientation == HORIZONTAL) or the left
-            (orientation == VERTICAL).
-          recodeDict : dict
-            Keys and values are both segment ID numbers. Defines the mapping
-            which recodes segment IDs. Updated in place.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
-        Adjust the segment ID numbers in the current tile, to make them
-        globally unique (and contiguous) across the whole mosaic.
-        
-        Make use of the overlapping regions of tiles above and left,
-        to identify shared segments, and recode those to segment IDs 
-        from the adjacent tiles (i.e. we change the current tile, not 
-        the adjacent ones). Non-shared segments are increased so they 
-        are larger than previous values. 
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            The array of segment IDs for a single image tile
-          maxSegId : shepseg.SegIdType
-            The current maximum segment ID for all preceding tiles.
-          tileRow, tileCol : int
-            The row/col numbers of this tile, within the whole-mosaic
-            tile numbering scheme. (These are not pixel numbers, but tile
-            grid numbers)
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-          newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            A copy of tileData, with new segment ID numbers.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
-        Recode the segment IDs in the given tileData array.
-        
-        For segment IDs which are keys in recodeDict, these
-        are replaced with the corresponding entry. For all other 
-        segment IDs, they are replaced with sequentially increasing
-        ID numbers, starting from one more than the previous
-        maximum segment ID (maxSegId). 
-        
-        A re-coded copy of tileData is created, the original is 
-        unchanged.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Segment IDs of tile
-          recodeDict : dict
-            Keys and values are segment ID numbers. Defines mapping
-            for segment relabelling
-          maxSegId : shepseg.SegIdType
-            Maximum segment ID number
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-            newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-              Segment IDs of tile, after relabelling
-            newMaxSegId : shepseg.SegIdType
-              New maximum segment ID after relabelling
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.saveOverlap(self, overlapCacheKey, overlapData)
-        Save given overlap data to cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.segmentAllTiles(self)
-        Run segmentation for all tiles, and write output image. Runs a number
-        of segmentation workers, each working independently on individual
-        tiles. The tiles to process are sent via a Queue, and the computed
-        results are returned via the SegmentationResultCache.
-        
-        Stitching the tiles together is run in the main thread, beginning as
-        soon as the first tile is completed.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.setupNetworkComms(self)
-        Set up a NetworkDataChannel to communicate with the workers
-        outside the main process (e.g. Fargate instances)
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.setupOverviews(self, outDs)
-        Calculate a suitable set of overview levels to use for output
-        segmentation file, and set these up on the given Dataset. Stores
-        the overview levels list as self.overviewLevels
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.shutdown(self)
-        Shut down the workers and data channel
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.specificChecks(self)
-        Initial checks which are specific to the subclass
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.startWorkers(self)
-        Start all segmentation workers as AWS Fargate tasks
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.stitchTiles(self)
-        Recombine individual tiles into a single segment raster output 
-        file. Segment ID values are recoded to be unique across the whole
-        raster, and contiguous.
-        
-        Sets maxSegId and outDs on self.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.waitClusterTasksFinished(self)
-        Poll the given cluster until the number of tasks reaches zero
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.writeHistogramToFile(outBand, histAccum)
-        Write the accumulated histogram to the output segmentation file
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegFargateMgr.writeOverviews(self, outBand, arr, xOff, yOff)
-        Calculate and write out the overview layers for the tile
-        given as arr.
-
-### class SegNoConcurrencyMgr
+### class SegNoConcurrencyMgr(SegmentationConcurrencyMgr)
       Runs tiled segmentation with no concurrency
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
-        Constructor. Just saves all its arguments to self, and does a couple
-        of quick checks.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+          Constructor. Just saves all its arguments to self, and does a couple
+          of quick checks.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.checkForEmptySegments(self, hist, overlapSize)
-        Check the final segmentation for any empty segments. These
-        can be problematic later, and should be avoided. Prints a
-        warning message if empty segments are found.
-        
-        Parameters
-        ----------
-          hist : ndarray of uint32
-            Histogram counts for the segmentation raster
-          overlapSize : int
-            Number of pixels to use in overlaps between tiles
-        
-        Returns
-        -------
-          hasEmptySegments : bool
-            True if there are segment ID numbers with no pixels
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.checkWorkerExceptions(self)
+          Dummy. No workers, so no worker exceptions.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.checkWorkerExceptions(self)
-        Dummy. No workers, so no worker exceptions.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.getTileSegmentation(self, col, row)
+          Read the requested tile of segmentation output from disk
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.crossesMidline(overlap, segLoc, orientation)
-        Check whether the given segment crosses the midline of the
-        given overlap. If it does not, then it will lie entirely within
-        exactly one tile, but if it does cross, then it will need to be
-        re-coded across the midline.
-        
-        Parameters
-        ----------
-          overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Array of segments just for this overlap region
-          segLoc : shepseg.RowColArray
-            The row/col coordinates (within the overlap array) of the
-            pixels for the segment of interest
-          orientation : {HORIZONTAL, VERTICAL}
-            Indicates the orientation of the midline
-        
-        Returns
-        -------
-          crosses : bool
-            True if the given segment crosses the midline
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.loadOverlap(self, overlapCacheKey)
+          Load the requested overlap from disk cache
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.getTileSegmentation(self, col, row)
-        Read the requested tile of segmentation output from disk
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.overlapCacheFilename(self, overlapCacheKey)
+          Return filename for given overlapCacheKey
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.initialize(self)
-        Runs initial phase of segmentation. This does not have any concurrency,
-        so is the same for every concurrencyType. The main job is to do the
-        spectral clustering, setting self.kmeansObj
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.saveOverlap(self, overlapCacheKey, overlapData)
+          Save given overlap data to disk file
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.loadOverlap(self, overlapCacheKey)
-        Load the requested overlap from disk cache
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.segmentAllTiles(self)
+          Run segmentation for all tiles, and write output image. Just runs all
+          tiles in sequence, and then the recode and stitch together for final
+          output.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.overlapCacheFilename(self, overlapCacheKey)
-        Return filename for given overlapCacheKey
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.writeTileToTemp(self, segResult, filename, outDrvr, xpos, ypos, xsize, ysize)
+          Write the segmented tile to a temporary image file
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.overlapCacheKey(col, row, edge)
-        Return the temporary cache key used for the overlap array
-        
-        Parameters
-        ----------
-          col, row : int
-            Tile column & row numbers
-          edge : {right', 'bottom'}
-            Indicates from which edge of the given tile the overlap is taken
-        
-        Returns
-        -------
-          cachekey : str
-            Identifying key for the overlap
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.popFromQue(que)
-        Pop out the next item from the given Queue, returning None if
-        the queue is empty.
-        
-        WARNING: don't use this if the queued items can be None
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
-        Work out a mapping which recodes segment ID numbers from
-        the tile in tileData. Segments to be recoded are those which 
-        are in the overlap with an earlier tile, and which cross the 
-        midline of the overlap, which is where the stitchline between 
-        the tiles will fall. 
-        
-        Updates recodeDict, which is a dictionary keyed on the 
-        existing segment ID numbers, where the value of each entry 
-        is the segment ID number from the earlier tile, to be used 
-        to recode the segment in the current tile. 
-        
-        overlapA and overlapB are numpy arrays of pixels in the overlap
-        region in question, giving the segment ID numbers in the two tiles.
-        The values in overlapB are from the earlier tile, and those in
-        overlapA are from the current tile.
-        
-        It is critically important that the overlapping region is either
-        at the top or the left of the current tile, as this means that 
-        the row and column numbers of pixels in the overlap arrays 
-        match the same pixels in the full tile. This cannot be used
-        for overlaps on the right or bottom of the current tile.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Tile subset of segment ID image
-          overlapA, overlapB : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Tile overlap subsets of segment ID image
-          orientation : {HORIZONTAL, VERTICAL}
-            The orientation parameter defines whether we are dealing with
-            overlap at the top (orientation == HORIZONTAL) or the left
-            (orientation == VERTICAL).
-          recodeDict : dict
-            Keys and values are both segment ID numbers. Defines the mapping
-            which recodes segment IDs. Updated in place.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
-        Adjust the segment ID numbers in the current tile, to make them
-        globally unique (and contiguous) across the whole mosaic.
-        
-        Make use of the overlapping regions of tiles above and left,
-        to identify shared segments, and recode those to segment IDs 
-        from the adjacent tiles (i.e. we change the current tile, not 
-        the adjacent ones). Non-shared segments are increased so they 
-        are larger than previous values. 
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            The array of segment IDs for a single image tile
-          maxSegId : shepseg.SegIdType
-            The current maximum segment ID for all preceding tiles.
-          tileRow, tileCol : int
-            The row/col numbers of this tile, within the whole-mosaic
-            tile numbering scheme. (These are not pixel numbers, but tile
-            grid numbers)
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-          newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            A copy of tileData, with new segment ID numbers.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
-        Recode the segment IDs in the given tileData array.
-        
-        For segment IDs which are keys in recodeDict, these
-        are replaced with the corresponding entry. For all other 
-        segment IDs, they are replaced with sequentially increasing
-        ID numbers, starting from one more than the previous
-        maximum segment ID (maxSegId). 
-        
-        A re-coded copy of tileData is created, the original is 
-        unchanged.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Segment IDs of tile
-          recodeDict : dict
-            Keys and values are segment ID numbers. Defines mapping
-            for segment relabelling
-          maxSegId : shepseg.SegIdType
-            Maximum segment ID number
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-            newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-              Segment IDs of tile, after relabelling
-            newMaxSegId : shepseg.SegIdType
-              New maximum segment ID after relabelling
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.saveOverlap(self, overlapCacheKey, overlapData)
-        Save given overlap data to disk file
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.segmentAllTiles(self)
-        Run segmentation for all tiles, and write output image. Just runs all
-        tiles in sequence, and then the recode and stitch together for final
-        output.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.setupNetworkComms(self)
-        Set up a NetworkDataChannel to communicate with the workers
-        outside the main process (e.g. Fargate instances)
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.setupOverviews(self, outDs)
-        Calculate a suitable set of overview levels to use for output
-        segmentation file, and set these up on the given Dataset. Stores
-        the overview levels list as self.overviewLevels
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.shutdown(self)
-        Any explicit shutdown operations
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.specificChecks(self)
-        Checks which are specific to the subclass. Called at the
-        end of __init__().
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.startWorkers(self)
-        Start segmentation workers, if required
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.stitchTiles(self)
-        Recombine individual tiles into a single segment raster output 
-        file. Segment ID values are recoded to be unique across the whole
-        raster, and contiguous.
-        
-        Sets maxSegId and outDs on self.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.writeHistogramToFile(outBand, histAccum)
-        Write the accumulated histogram to the output segmentation file
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.writeOverviews(self, outBand, arr, xOff, yOff)
-        Calculate and write out the overview layers for the tile
-        given as arr.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegNoConcurrencyMgr.writeTileToTemp(self, segResult, filename, outDrvr, xpos, ypos, xsize, ysize)
-        Write the segmented tile to a temporary image file
-
-### class SegSubprocMgr
+### class SegSubprocMgr(SegmentationConcurrencyMgr)
       Run tiled segmentation with concurrency based on subprocess workers.
       This is used only as a test bed for the NetworkDataChannel and external
       worker command, and should not be used in real life.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
-        Constructor. Just saves all its arguments to self, and does a couple
-        of quick checks.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+          Constructor. Just saves all its arguments to self, and does a couple
+          of quick checks.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.checkForEmptySegments(self, hist, overlapSize)
-        Check the final segmentation for any empty segments. These
-        can be problematic later, and should be avoided. Prints a
-        warning message if empty segments are found.
-        
-        Parameters
-        ----------
-          hist : ndarray of uint32
-            Histogram counts for the segmentation raster
-          overlapSize : int
-            Number of pixels to use in overlaps between tiles
-        
-        Returns
-        -------
-          hasEmptySegments : bool
-            True if there are segment ID numbers with no pixels
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.startWorkers(self)
+          Start all segmentation workers
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.checkWorkerExceptions(self)
-        Check if any workers raised exceptions. If so, raise a local exception
-        with the WorkerErrorRecord.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.crossesMidline(overlap, segLoc, orientation)
-        Check whether the given segment crosses the midline of the
-        given overlap. If it does not, then it will lie entirely within
-        exactly one tile, but if it does cross, then it will need to be
-        re-coded across the midline.
-        
-        Parameters
-        ----------
-          overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Array of segments just for this overlap region
-          segLoc : shepseg.RowColArray
-            The row/col coordinates (within the overlap array) of the
-            pixels for the segment of interest
-          orientation : {HORIZONTAL, VERTICAL}
-            Indicates the orientation of the midline
-        
-        Returns
-        -------
-          crosses : bool
-            True if the given segment crosses the midline
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.getTileSegmentation(self, col, row)
-        Get the segmented tile output data from the local cache, and remove it
-        from the cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.initialize(self)
-        Runs initial phase of segmentation. This does not have any concurrency,
-        so is the same for every concurrencyType. The main job is to do the
-        spectral clustering, setting self.kmeansObj
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.loadOverlap(self, overlapCacheKey)
-        Load the requested overlap from cache, and remove it from cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.overlapCacheKey(col, row, edge)
-        Return the temporary cache key used for the overlap array
-        
-        Parameters
-        ----------
-          col, row : int
-            Tile column & row numbers
-          edge : {right', 'bottom'}
-            Indicates from which edge of the given tile the overlap is taken
-        
-        Returns
-        -------
-          cachekey : str
-            Identifying key for the overlap
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.popFromQue(que)
-        Pop out the next item from the given Queue, returning None if
-        the queue is empty.
-        
-        WARNING: don't use this if the queued items can be None
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
-        Work out a mapping which recodes segment ID numbers from
-        the tile in tileData. Segments to be recoded are those which 
-        are in the overlap with an earlier tile, and which cross the 
-        midline of the overlap, which is where the stitchline between 
-        the tiles will fall. 
-        
-        Updates recodeDict, which is a dictionary keyed on the 
-        existing segment ID numbers, where the value of each entry 
-        is the segment ID number from the earlier tile, to be used 
-        to recode the segment in the current tile. 
-        
-        overlapA and overlapB are numpy arrays of pixels in the overlap
-        region in question, giving the segment ID numbers in the two tiles.
-        The values in overlapB are from the earlier tile, and those in
-        overlapA are from the current tile.
-        
-        It is critically important that the overlapping region is either
-        at the top or the left of the current tile, as this means that 
-        the row and column numbers of pixels in the overlap arrays 
-        match the same pixels in the full tile. This cannot be used
-        for overlaps on the right or bottom of the current tile.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Tile subset of segment ID image
-          overlapA, overlapB : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Tile overlap subsets of segment ID image
-          orientation : {HORIZONTAL, VERTICAL}
-            The orientation parameter defines whether we are dealing with
-            overlap at the top (orientation == HORIZONTAL) or the left
-            (orientation == VERTICAL).
-          recodeDict : dict
-            Keys and values are both segment ID numbers. Defines the mapping
-            which recodes segment IDs. Updated in place.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
-        Adjust the segment ID numbers in the current tile, to make them
-        globally unique (and contiguous) across the whole mosaic.
-        
-        Make use of the overlapping regions of tiles above and left,
-        to identify shared segments, and recode those to segment IDs 
-        from the adjacent tiles (i.e. we change the current tile, not 
-        the adjacent ones). Non-shared segments are increased so they 
-        are larger than previous values. 
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            The array of segment IDs for a single image tile
-          maxSegId : shepseg.SegIdType
-            The current maximum segment ID for all preceding tiles.
-          tileRow, tileCol : int
-            The row/col numbers of this tile, within the whole-mosaic
-            tile numbering scheme. (These are not pixel numbers, but tile
-            grid numbers)
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-          newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            A copy of tileData, with new segment ID numbers.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
-        Recode the segment IDs in the given tileData array.
-        
-        For segment IDs which are keys in recodeDict, these
-        are replaced with the corresponding entry. For all other 
-        segment IDs, they are replaced with sequentially increasing
-        ID numbers, starting from one more than the previous
-        maximum segment ID (maxSegId). 
-        
-        A re-coded copy of tileData is created, the original is 
-        unchanged.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Segment IDs of tile
-          recodeDict : dict
-            Keys and values are segment ID numbers. Defines mapping
-            for segment relabelling
-          maxSegId : shepseg.SegIdType
-            Maximum segment ID number
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-            newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-              Segment IDs of tile, after relabelling
-            newMaxSegId : shepseg.SegIdType
-              New maximum segment ID after relabelling
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.saveOverlap(self, overlapCacheKey, overlapData)
-        Save given overlap data to cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.segmentAllTiles(self)
-        Run segmentation for all tiles, and write output image. Runs a number
-        of segmentation workers, each working independently on individual
-        tiles. The tiles to process are sent via a Queue, and the computed
-        results are returned via the SegmentationResultCache.
-        
-        Stitching the tiles together is run in the main thread, beginning as
-        soon as the first tile is completed.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.setupNetworkComms(self)
-        Set up a NetworkDataChannel to communicate with the workers
-        outside the main process (e.g. Fargate instances)
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.setupOverviews(self, outDs)
-        Calculate a suitable set of overview levels to use for output
-        segmentation file, and set these up on the given Dataset. Stores
-        the overview levels list as self.overviewLevels
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.shutdown(self)
-        Any explicit shutdown operations
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.specificChecks(self)
-        Checks which are specific to the subclass. Called at the
-        end of __init__().
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.startWorkers(self)
-        Start all segmentation workers
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.stitchTiles(self)
-        Recombine individual tiles into a single segment raster output 
-        file. Segment ID values are recoded to be unique across the whole
-        raster, and contiguous.
-        
-        Sets maxSegId and outDs on self.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.writeHistogramToFile(outBand, histAccum)
-        Write the accumulated histogram to the output segmentation file
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegSubprocMgr.writeOverviews(self, outBand, arr, xOff, yOff)
-        Calculate and write out the overview layers for the tile
-        given as arr.
-
-### class SegThreadsMgr
+### class SegThreadsMgr(SegmentationConcurrencyMgr)
       Run tiled segmentation with concurrency based on threads within the main
       process.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
-        Constructor. Just saves all its arguments to self, and does a couple
-        of quick checks.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+          Constructor. Just saves all its arguments to self, and does a couple
+          of quick checks.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.checkForEmptySegments(self, hist, overlapSize)
-        Check the final segmentation for any empty segments. These
-        can be problematic later, and should be avoided. Prints a
-        warning message if empty segments are found.
-        
-        Parameters
-        ----------
-          hist : ndarray of uint32
-            Histogram counts for the segmentation raster
-          overlapSize : int
-            Number of pixels to use in overlaps between tiles
-        
-        Returns
-        -------
-          hasEmptySegments : bool
-            True if there are segment ID numbers with no pixels
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.setupNetworkComms(self)
+          Dummy. No network communications required.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.checkWorkerExceptions(self)
-        Check if any workers raised exceptions. If so, raise a local exception
-        with the WorkerErrorRecord.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.shutdown(self)
+          Shut down the thread pool
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.crossesMidline(overlap, segLoc, orientation)
-        Check whether the given segment crosses the midline of the
-        given overlap. If it does not, then it will lie entirely within
-        exactly one tile, but if it does cross, then it will need to be
-        re-coded across the midline.
-        
-        Parameters
-        ----------
-          overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Array of segments just for this overlap region
-          segLoc : shepseg.RowColArray
-            The row/col coordinates (within the overlap array) of the
-            pixels for the segment of interest
-          orientation : {HORIZONTAL, VERTICAL}
-            Indicates the orientation of the midline
-        
-        Returns
-        -------
-          crosses : bool
-            True if the given segment crosses the midline
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.specificChecks(self)
+          Checks which are specific to the subclass
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.getTileSegmentation(self, col, row)
-        Get the segmented tile output data from the local cache, and remove it
-        from the cache
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.startWorkers(self)
+          Start worker threads for segmenting tiles
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.initialize(self)
-        Runs initial phase of segmentation. This does not have any concurrency,
-        so is the same for every concurrencyType. The main job is to do the
-        spectral clustering, setting self.kmeansObj
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.loadOverlap(self, overlapCacheKey)
-        Load the requested overlap from cache, and remove it from cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.overlapCacheKey(col, row, edge)
-        Return the temporary cache key used for the overlap array
-        
-        Parameters
-        ----------
-          col, row : int
-            Tile column & row numbers
-          edge : {right', 'bottom'}
-            Indicates from which edge of the given tile the overlap is taken
-        
-        Returns
-        -------
-          cachekey : str
-            Identifying key for the overlap
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.popFromQue(que)
-        Pop out the next item from the given Queue, returning None if
-        the queue is empty.
-        
-        WARNING: don't use this if the queued items can be None
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
-        Work out a mapping which recodes segment ID numbers from
-        the tile in tileData. Segments to be recoded are those which 
-        are in the overlap with an earlier tile, and which cross the 
-        midline of the overlap, which is where the stitchline between 
-        the tiles will fall. 
-        
-        Updates recodeDict, which is a dictionary keyed on the 
-        existing segment ID numbers, where the value of each entry 
-        is the segment ID number from the earlier tile, to be used 
-        to recode the segment in the current tile. 
-        
-        overlapA and overlapB are numpy arrays of pixels in the overlap
-        region in question, giving the segment ID numbers in the two tiles.
-        The values in overlapB are from the earlier tile, and those in
-        overlapA are from the current tile.
-        
-        It is critically important that the overlapping region is either
-        at the top or the left of the current tile, as this means that 
-        the row and column numbers of pixels in the overlap arrays 
-        match the same pixels in the full tile. This cannot be used
-        for overlaps on the right or bottom of the current tile.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Tile subset of segment ID image
-          overlapA, overlapB : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Tile overlap subsets of segment ID image
-          orientation : {HORIZONTAL, VERTICAL}
-            The orientation parameter defines whether we are dealing with
-            overlap at the top (orientation == HORIZONTAL) or the left
-            (orientation == VERTICAL).
-          recodeDict : dict
-            Keys and values are both segment ID numbers. Defines the mapping
-            which recodes segment IDs. Updated in place.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
-        Adjust the segment ID numbers in the current tile, to make them
-        globally unique (and contiguous) across the whole mosaic.
-        
-        Make use of the overlapping regions of tiles above and left,
-        to identify shared segments, and recode those to segment IDs 
-        from the adjacent tiles (i.e. we change the current tile, not 
-        the adjacent ones). Non-shared segments are increased so they 
-        are larger than previous values. 
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            The array of segment IDs for a single image tile
-          maxSegId : shepseg.SegIdType
-            The current maximum segment ID for all preceding tiles.
-          tileRow, tileCol : int
-            The row/col numbers of this tile, within the whole-mosaic
-            tile numbering scheme. (These are not pixel numbers, but tile
-            grid numbers)
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-          newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            A copy of tileData, with new segment ID numbers.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
-        Recode the segment IDs in the given tileData array.
-        
-        For segment IDs which are keys in recodeDict, these
-        are replaced with the corresponding entry. For all other 
-        segment IDs, they are replaced with sequentially increasing
-        ID numbers, starting from one more than the previous
-        maximum segment ID (maxSegId). 
-        
-        A re-coded copy of tileData is created, the original is 
-        unchanged.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Segment IDs of tile
-          recodeDict : dict
-            Keys and values are segment ID numbers. Defines mapping
-            for segment relabelling
-          maxSegId : shepseg.SegIdType
-            Maximum segment ID number
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-            newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-              Segment IDs of tile, after relabelling
-            newMaxSegId : shepseg.SegIdType
-              New maximum segment ID after relabelling
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.saveOverlap(self, overlapCacheKey, overlapData)
-        Save given overlap data to cache
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.segmentAllTiles(self)
-        Run segmentation for all tiles, and write output image. Runs a number
-        of segmentation workers, each working independently on individual
-        tiles. The tiles to process are sent via a Queue, and the computed
-        results are returned via the SegmentationResultCache.
-        
-        Stitching the tiles together is run in the main thread, beginning as
-        soon as the first tile is completed.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.setupNetworkComms(self)
-        Dummy. No network communications required.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.setupOverviews(self, outDs)
-        Calculate a suitable set of overview levels to use for output
-        segmentation file, and set these up on the given Dataset. Stores
-        the overview levels list as self.overviewLevels
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.shutdown(self)
-        Shut down the thread pool
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.specificChecks(self)
-        Checks which are specific to the subclass
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.startWorkers(self)
-        Start worker threads for segmenting tiles
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.stitchTiles(self)
-        Recombine individual tiles into a single segment raster output 
-        file. Segment ID values are recoded to be unique across the whole
-        raster, and contiguous.
-        
-        Sets maxSegId and outDs on self.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.worker(self)
-        Worker function. Called for each worker thread.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.writeHistogramToFile(outBand, histAccum)
-        Write the accumulated histogram to the output segmentation file
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.writeOverviews(self, outBand, arr, xOff, yOff)
-        Calculate and write out the overview layers for the tile
-        given as arr.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegThreadsMgr.worker(self)
+          Worker function. Called for each worker thread.
 
 ### class SegmentationConcurrencyConfig
       Configuration for concurrency in segmentation of multiple tiles.
@@ -1093,291 +271,291 @@
         fargateCfg : None or instance of FargateConfig
           Configuration for AWS Fargate (when using CONC_FARGATE)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyConfig.\_\_init\_\_(self, concurrencyType='CONC_NONE', numWorkers=0, maxConcurrentReads=20, tileCompletionTimeout=60, segResultCacheSize=30, segResultCacheAddTimeout=300, barrierTimeout=300, fargateCfg=None)
-        Configuration for managing segmentation concurrency.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyConfig.\_\_init\_\_(self, concurrencyType='CONC_NONE', numWorkers=0, maxConcurrentReads=20, tileCompletionTimeout=60, segResultCacheSize=30, segResultCacheAddTimeout=300, barrierTimeout=300, fargateCfg=None)
+          Configuration for managing segmentation concurrency.
 
 ### class SegmentationConcurrencyMgr
       Base class for segmentation concurrency
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
-        Constructor. Just saves all its arguments to self, and does a couple
-        of quick checks.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.\_\_init\_\_(self, infile, outfile, tileSize, overlapSize, minSegmentSize, numClusters, bandNumbers, subsamplePcnt, maxSpectralDiff, imgNullVal, fixedKMeansInit, fourConnected, verbose, simpleTileRecode, outputDriver, creationOptions, spectDistPcntile, kmeansObj, tempfilesDriver, tempfilesCreationOptions, writeHistogram, returnGDALDS, concCfg)
+          Constructor. Just saves all its arguments to self, and does a couple
+          of quick checks.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.checkForEmptySegments(self, hist, overlapSize)
-        Check the final segmentation for any empty segments. These
-        can be problematic later, and should be avoided. Prints a
-        warning message if empty segments are found.
-        
-        Parameters
-        ----------
-          hist : ndarray of uint32
-            Histogram counts for the segmentation raster
-          overlapSize : int
-            Number of pixels to use in overlaps between tiles
-        
-        Returns
-        -------
-          hasEmptySegments : bool
-            True if there are segment ID numbers with no pixels
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.checkForEmptySegments(self, hist, overlapSize)
+          Check the final segmentation for any empty segments. These
+          can be problematic later, and should be avoided. Prints a
+          warning message if empty segments are found.
+          
+          Parameters
+          ----------
+            hist : ndarray of uint32
+              Histogram counts for the segmentation raster
+            overlapSize : int
+              Number of pixels to use in overlaps between tiles
+          
+          Returns
+          -------
+            hasEmptySegments : bool
+              True if there are segment ID numbers with no pixels
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.checkWorkerExceptions(self)
-        Check if any workers raised exceptions. If so, raise a local exception
-        with the WorkerErrorRecord.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.checkWorkerExceptions(self)
+          Check if any workers raised exceptions. If so, raise a local exception
+          with the WorkerErrorRecord.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.crossesMidline(overlap, segLoc, orientation)
-        Check whether the given segment crosses the midline of the
-        given overlap. If it does not, then it will lie entirely within
-        exactly one tile, but if it does cross, then it will need to be
-        re-coded across the midline.
-        
-        Parameters
-        ----------
-          overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Array of segments just for this overlap region
-          segLoc : shepseg.RowColArray
-            The row/col coordinates (within the overlap array) of the
-            pixels for the segment of interest
-          orientation : {HORIZONTAL, VERTICAL}
-            Indicates the orientation of the midline
-        
-        Returns
-        -------
-          crosses : bool
-            True if the given segment crosses the midline
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.crossesMidline(overlap, segLoc, orientation)
+          Check whether the given segment crosses the midline of the
+          given overlap. If it does not, then it will lie entirely within
+          exactly one tile, but if it does cross, then it will need to be
+          re-coded across the midline.
+          
+          Parameters
+          ----------
+            overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
+              Array of segments just for this overlap region
+            segLoc : shepseg.RowColArray
+              The row/col coordinates (within the overlap array) of the
+              pixels for the segment of interest
+            orientation : {HORIZONTAL, VERTICAL}
+              Indicates the orientation of the midline
+          
+          Returns
+          -------
+            crosses : bool
+              True if the given segment crosses the midline
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.getTileSegmentation(self, col, row)
-        Get the segmented tile output data from the local cache, and remove it
-        from the cache
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.getTileSegmentation(self, col, row)
+          Get the segmented tile output data from the local cache, and remove it
+          from the cache
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.initialize(self)
-        Runs initial phase of segmentation. This does not have any concurrency,
-        so is the same for every concurrencyType. The main job is to do the
-        spectral clustering, setting self.kmeansObj
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.initialize(self)
+          Runs initial phase of segmentation. This does not have any concurrency,
+          so is the same for every concurrencyType. The main job is to do the
+          spectral clustering, setting self.kmeansObj
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.loadOverlap(self, overlapCacheKey)
-        Load the requested overlap from cache, and remove it from cache
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.loadOverlap(self, overlapCacheKey)
+          Load the requested overlap from cache, and remove it from cache
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.overlapCacheKey(col, row, edge)
-        Return the temporary cache key used for the overlap array
-        
-        Parameters
-        ----------
-          col, row : int
-            Tile column & row numbers
-          edge : {right', 'bottom'}
-            Indicates from which edge of the given tile the overlap is taken
-        
-        Returns
-        -------
-          cachekey : str
-            Identifying key for the overlap
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.overlapCacheKey(col, row, edge)
+          Return the temporary cache key used for the overlap array
+          
+          Parameters
+          ----------
+            col, row : int
+              Tile column & row numbers
+            edge : {right', 'bottom'}
+              Indicates from which edge of the given tile the overlap is taken
+          
+          Returns
+          -------
+            cachekey : str
+              Identifying key for the overlap
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.popFromQue(que)
-        Pop out the next item from the given Queue, returning None if
-        the queue is empty.
-        
-        WARNING: don't use this if the queued items can be None
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.popFromQue(que)
+          Pop out the next item from the given Queue, returning None if
+          the queue is empty.
+          
+          WARNING: don't use this if the queued items can be None
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
-        Work out a mapping which recodes segment ID numbers from
-        the tile in tileData. Segments to be recoded are those which 
-        are in the overlap with an earlier tile, and which cross the 
-        midline of the overlap, which is where the stitchline between 
-        the tiles will fall. 
-        
-        Updates recodeDict, which is a dictionary keyed on the 
-        existing segment ID numbers, where the value of each entry 
-        is the segment ID number from the earlier tile, to be used 
-        to recode the segment in the current tile. 
-        
-        overlapA and overlapB are numpy arrays of pixels in the overlap
-        region in question, giving the segment ID numbers in the two tiles.
-        The values in overlapB are from the earlier tile, and those in
-        overlapA are from the current tile.
-        
-        It is critically important that the overlapping region is either
-        at the top or the left of the current tile, as this means that 
-        the row and column numbers of pixels in the overlap arrays 
-        match the same pixels in the full tile. This cannot be used
-        for overlaps on the right or bottom of the current tile.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Tile subset of segment ID image
-          overlapA, overlapB : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
-            Tile overlap subsets of segment ID image
-          orientation : {HORIZONTAL, VERTICAL}
-            The orientation parameter defines whether we are dealing with
-            overlap at the top (orientation == HORIZONTAL) or the left
-            (orientation == VERTICAL).
-          recodeDict : dict
-            Keys and values are both segment ID numbers. Defines the mapping
-            which recodes segment IDs. Updated in place.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
+          Work out a mapping which recodes segment ID numbers from
+          the tile in tileData. Segments to be recoded are those which 
+          are in the overlap with an earlier tile, and which cross the 
+          midline of the overlap, which is where the stitchline between 
+          the tiles will fall. 
+          
+          Updates recodeDict, which is a dictionary keyed on the 
+          existing segment ID numbers, where the value of each entry 
+          is the segment ID number from the earlier tile, to be used 
+          to recode the segment in the current tile. 
+          
+          overlapA and overlapB are numpy arrays of pixels in the overlap
+          region in question, giving the segment ID numbers in the two tiles.
+          The values in overlapB are from the earlier tile, and those in
+          overlapA are from the current tile.
+          
+          It is critically important that the overlapping region is either
+          at the top or the left of the current tile, as this means that 
+          the row and column numbers of pixels in the overlap arrays 
+          match the same pixels in the full tile. This cannot be used
+          for overlaps on the right or bottom of the current tile.
+          
+          Parameters
+          ----------
+            tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
+              Tile subset of segment ID image
+            overlapA, overlapB : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
+              Tile overlap subsets of segment ID image
+            orientation : {HORIZONTAL, VERTICAL}
+              The orientation parameter defines whether we are dealing with
+              overlap at the top (orientation == HORIZONTAL) or the left
+              (orientation == VERTICAL).
+            recodeDict : dict
+              Keys and values are both segment ID numbers. Defines the mapping
+              which recodes segment IDs. Updated in place.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
-        Adjust the segment ID numbers in the current tile, to make them
-        globally unique (and contiguous) across the whole mosaic.
-        
-        Make use of the overlapping regions of tiles above and left,
-        to identify shared segments, and recode those to segment IDs 
-        from the adjacent tiles (i.e. we change the current tile, not 
-        the adjacent ones). Non-shared segments are increased so they 
-        are larger than previous values. 
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            The array of segment IDs for a single image tile
-          maxSegId : shepseg.SegIdType
-            The current maximum segment ID for all preceding tiles.
-          tileRow, tileCol : int
-            The row/col numbers of this tile, within the whole-mosaic
-            tile numbering scheme. (These are not pixel numbers, but tile
-            grid numbers)
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
-          newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            A copy of tileData, with new segment ID numbers.
-
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
-        Recode the segment IDs in the given tileData array.
-        
-        For segment IDs which are keys in recodeDict, these
-        are replaced with the corresponding entry. For all other 
-        segment IDs, they are replaced with sequentially increasing
-        ID numbers, starting from one more than the previous
-        maximum segment ID (maxSegId). 
-        
-        A re-coded copy of tileData is created, the original is 
-        unchanged.
-        
-        Parameters
-        ----------
-          tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-            Segment IDs of tile
-          recodeDict : dict
-            Keys and values are segment ID numbers. Defines mapping
-            for segment relabelling
-          maxSegId : shepseg.SegIdType
-            Maximum segment ID number
-          top, bottom, left, right : int
-            Pixel coordinates *within tile* of the non-overlap region of
-            the tile.
-        
-        Returns
-        -------
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
+          Adjust the segment ID numbers in the current tile, to make them
+          globally unique (and contiguous) across the whole mosaic.
+          
+          Make use of the overlapping regions of tiles above and left,
+          to identify shared segments, and recode those to segment IDs 
+          from the adjacent tiles (i.e. we change the current tile, not 
+          the adjacent ones). Non-shared segments are increased so they 
+          are larger than previous values. 
+          
+          Parameters
+          ----------
+            tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
+              The array of segment IDs for a single image tile
+            maxSegId : shepseg.SegIdType
+              The current maximum segment ID for all preceding tiles.
+            tileRow, tileCol : int
+              The row/col numbers of this tile, within the whole-mosaic
+              tile numbering scheme. (These are not pixel numbers, but tile
+              grid numbers)
+            top, bottom, left, right : int
+              Pixel coordinates *within tile* of the non-overlap region of
+              the tile.
+          
+          Returns
+          -------
             newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
-              Segment IDs of tile, after relabelling
-            newMaxSegId : shepseg.SegIdType
-              New maximum segment ID after relabelling
+              A copy of tileData, with new segment ID numbers.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.saveOverlap(self, overlapCacheKey, overlapData)
-        Save given overlap data to cache
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
+          Recode the segment IDs in the given tileData array.
+          
+          For segment IDs which are keys in recodeDict, these
+          are replaced with the corresponding entry. For all other 
+          segment IDs, they are replaced with sequentially increasing
+          ID numbers, starting from one more than the previous
+          maximum segment ID (maxSegId). 
+          
+          A re-coded copy of tileData is created, the original is 
+          unchanged.
+          
+          Parameters
+          ----------
+            tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
+              Segment IDs of tile
+            recodeDict : dict
+              Keys and values are segment ID numbers. Defines mapping
+              for segment relabelling
+            maxSegId : shepseg.SegIdType
+              Maximum segment ID number
+            top, bottom, left, right : int
+              Pixel coordinates *within tile* of the non-overlap region of
+              the tile.
+          
+          Returns
+          -------
+              newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
+                Segment IDs of tile, after relabelling
+              newMaxSegId : shepseg.SegIdType
+                New maximum segment ID after relabelling
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.segmentAllTiles(self)
-        Run segmentation for all tiles, and write output image. Runs a number
-        of segmentation workers, each working independently on individual
-        tiles. The tiles to process are sent via a Queue, and the computed
-        results are returned via the SegmentationResultCache.
-        
-        Stitching the tiles together is run in the main thread, beginning as
-        soon as the first tile is completed.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.saveOverlap(self, overlapCacheKey, overlapData)
+          Save given overlap data to cache
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.setupNetworkComms(self)
-        Set up a NetworkDataChannel to communicate with the workers
-        outside the main process (e.g. Fargate instances)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.segmentAllTiles(self)
+          Run segmentation for all tiles, and write output image. Runs a number
+          of segmentation workers, each working independently on individual
+          tiles. The tiles to process are sent via a Queue, and the computed
+          results are returned via the SegmentationResultCache.
+          
+          Stitching the tiles together is run in the main thread, beginning as
+          soon as the first tile is completed.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.setupOverviews(self, outDs)
-        Calculate a suitable set of overview levels to use for output
-        segmentation file, and set these up on the given Dataset. Stores
-        the overview levels list as self.overviewLevels
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.setupNetworkComms(self)
+          Set up a NetworkDataChannel to communicate with the workers
+          outside the main process (e.g. Fargate instances)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.shutdown(self)
-        Any explicit shutdown operations
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.setupOverviews(self, outDs)
+          Calculate a suitable set of overview levels to use for output
+          segmentation file, and set these up on the given Dataset. Stores
+          the overview levels list as self.overviewLevels
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.specificChecks(self)
-        Checks which are specific to the subclass. Called at the
-        end of __init__().
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.shutdown(self)
+          Any explicit shutdown operations
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.startWorkers(self)
-        Start segmentation workers, if required
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.specificChecks(self)
+          Checks which are specific to the subclass. Called at the
+          end of __init__().
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.stitchTiles(self)
-        Recombine individual tiles into a single segment raster output 
-        file. Segment ID values are recoded to be unique across the whole
-        raster, and contiguous.
-        
-        Sets maxSegId and outDs on self.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.startWorkers(self)
+          Start segmentation workers, if required
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.writeHistogramToFile(outBand, histAccum)
-        Write the accumulated histogram to the output segmentation file
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.stitchTiles(self)
+          Recombine individual tiles into a single segment raster output 
+          file. Segment ID values are recoded to be unique across the whole
+          raster, and contiguous.
+          
+          Sets maxSegId and outDs on self.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.writeOverviews(self, outBand, arr, xOff, yOff)
-        Calculate and write out the overview layers for the tile
-        given as arr.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.writeHistogramToFile(outBand, histAccum)
+          Write the accumulated histogram to the output segmentation file
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.writeOverviews(self, outBand, arr, xOff, yOff)
+          Calculate and write out the overview layers for the tile
+          given as arr.
 
 ### class SegmentationResultCache
       Thread-safe cache for segmentation results, by tile. As each worker completes
       a tile, it adds it directly to this cache. The writing thread can then
       pop tiles out of this when required.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.\_\_init\_\_(self, colRowList, timeout=None, size=10, addTimeout=300)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.\_\_init\_\_(self, colRowList, timeout=None, size=10, addTimeout=300)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.addResult(self, col, row, segResult)
-        Add a single segResult object to the cache, for the given (col, row)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.addResult(self, col, row, segResult)
+          Add a single segResult object to the cache, for the given (col, row)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.waitForTile(self, col, row)
-        Wait until the nominated tile is ready, and then pop it out of
-        the cache.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationResultCache.waitForTile(self, col, row)
+          Wait until the nominated tile is ready, and then pop it out of
+          the cache.
 
 ### class TileInfo
       Class that holds the pixel coordinates of the tiles within 
       an image. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.addTile(self, xpos, ypos, xsize, ysize, col, row)
-        Add a new tile to the set
-        
-        Parameters
-        ----------
-          xpos, ypos : int
-            Pixel column & row of top left pixel of tile
-          xsize, ysize : int
-            Number of pixel columns & rows in tile
-          col, row : int
-            Tile column & row
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.addTile(self, xpos, ypos, xsize, ysize, col, row)
+          Add a new tile to the set
+          
+          Parameters
+          ----------
+            xpos, ypos : int
+              Pixel column & row of top left pixel of tile
+            xsize, ysize : int
+              Number of pixel columns & rows in tile
+            col, row : int
+              Tile column & row
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.getNumTiles(self)
-        Get total number of tiles in the set
-        
-        Returns
-        -------
-          numTiles : int
-            Total number of tiles
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.getNumTiles(self)
+          Get total number of tiles in the set
+          
+          Returns
+          -------
+            numTiles : int
+              Total number of tiles
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TileInfo.getTile(self, col, row)
-        Return the position and shape of the requested tile, as
-        a single tuple of values
-        
-        Parameters
-        ----------
-          col, row : int
-            Tile column & row
-        
-        Returns
-        -------
-          xpos, ypos : int
-            Pixel column & row of top left pixel of tile
-          xsize, ysize : int
-            Number of pixel columns & rows in tile
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.getTile(self, col, row)
+          Return the position and shape of the requested tile, as
+          a single tuple of values
+          
+          Parameters
+          ----------
+            col, row : int
+              Tile column & row
+          
+          Returns
+          -------
+            xpos, ypos : int
+              Pixel column & row of top left pixel of tile
+            xsize, ysize : int
+              Number of pixel columns & rows in tile
 
 ### class TiledSegmentationResult
       Result of tiled segmentation
@@ -1407,8 +585,8 @@
           Open GDAL dataset object to the output file. May be None,
           see the returnGDALDS parameter to doTiledShepherdSegmentation.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TiledSegmentationResult.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TiledSegmentationResult.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def calcHistogramTiled(segfile, maxSegId, writeToRat=True)
@@ -1638,20 +816,20 @@
         Choose the sub-class corresponding to the given concurrencyType
 
 ## Values
-    BOTTOM_OVERLAP = bottom
-    CONC_FARGATE = CONC_FARGATE
-    CONC_NONE = CONC_NONE
-    CONC_SUBPROC = CONC_SUBPROC
-    CONC_THREADS = CONC_THREADS
+    BOTTOM_OVERLAP = 'bottom'
+    CONC_FARGATE = 'CONC_FARGATE'
+    CONC_NONE = 'CONC_NONE'
+    CONC_SUBPROC = 'CONC_SUBPROC'
+    CONC_THREADS = 'CONC_THREADS'
     DFLT_CHUNKSIZE = 100000
     DFLT_OVERLAPSIZE = 1024
-    DFLT_TEMPFILES_DRIVER = KEA
-    DFLT_TEMPFILES_EXT = kea
+    DFLT_TEMPFILES_DRIVER = 'KEA'
+    DFLT_TEMPFILES_EXT = 'kea'
     DFLT_TILESIZE = 4096
     HORIZONTAL = 0
-    RIGHT_OVERLAP = right
+    RIGHT_OVERLAP = 'right'
     TILESIZE = 1024
     VERTICAL = 1
     boto3 = None
     segIdNumbaType = uint32
-    updateCounts = CPUDispatcher(<function updateCounts at 0x7d072be1ae80>)
+    updateCounts = CPUDispatcher(<function updateCounts at 0x7e6aecd32fc0>)

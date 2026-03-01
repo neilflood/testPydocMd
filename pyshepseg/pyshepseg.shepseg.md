@@ -58,7 +58,7 @@
     .. [3] https://numba.pydata.org/
 
 ## Classes
-### class RowColArray
+### class RowColArray(RowColArray)
       This data structure is used to store the locations of
       every pixel in a given segment. It will be used for entries
       in a jit dictionary. This means we can quickly find all the
@@ -71,28 +71,28 @@
         rowcols : uint32 ndarray (length, 2)
           Row and col numbers of pixels in the segment
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RowColArray.\_\_init\_\_(self, length)
-        Initialize the data structure
-        
-        Parameters
-        ----------
-          length : int
-            Number of pixels in the segment
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RowColArray.\_\_init\_\_(self, length)
+          Initialize the data structure
+          
+          Parameters
+          ----------
+            length : int
+              Number of pixels in the segment
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RowColArray.append(self, row, col)
-        Add the coordinates of a new pixel in the segment
-        
-        Parameters
-        ----------
-          row : int
-            Row number of pixel
-          col : int
-            Column number of pixel
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RowColArray.append(self, row, col)
+          Add the coordinates of a new pixel in the segment
+          
+          Parameters
+          ----------
+            row : int
+              Row number of pixel
+            col : int
+              Column number of pixel
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RowColArray.getSegmentIndices(self)
-        Return the row and column numbers of the segment pixels
-        as a tuple, suitable for indexing the image array. 
-        This supports selection of all pixels for a given segment. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RowColArray.getSegmentIndices(self)
+          Return the row and column numbers of the segment pixels
+          as a tuple, suitable for indexing the image array. 
+          This supports selection of all pixels for a given segment. 
 
 ### class SegmentationResult
       Results of the segmentation process
@@ -110,8 +110,8 @@
         smallSegmentsEliminated : int
           Number of small segments merged into adjacent segments
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentationResult.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationResult.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def applySpectralClusters(kmeansObj, img, imgNullVal)
@@ -311,18 +311,18 @@
 
 ## Values
     MINSEGID = 1
-    RowColArray_Type = instance.jitclass.RowColArray#7d072bf8f1d0<idx:uint32,rowcols:array(uint32, 2d, A)>
+    RowColArray_Type = instance.jitclass.RowColArray#7e6aece9fe10<idx:uint32,rowcols:array(uint32, 2d, A)>
     SEGNULLVAL = 0
-    buildSegmentSpectra = CPUDispatcher(<function buildSegmentSpectra at 0x7d072bf85940>)
-    clump = CPUDispatcher(<function clump at 0x7d072bf84860>)
+    buildSegmentSpectra = CPUDispatcher(<function buildSegmentSpectra at 0x7e6aece99a80>)
+    clump = CPUDispatcher(<function clump at 0x7e6aece989a0>)
     division = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)
-    doMerge = CPUDispatcher(<function doMerge at 0x7d072bf9cae0>)
-    eliminateSmallSegments = CPUDispatcher(<function eliminateSmallSegments at 0x7d072bf9c540>)
-    findMergeSegment = CPUDispatcher(<function findMergeSegment at 0x7d072bf9c680>)
-    findNearestNeighbourPixel = CPUDispatcher(<function findNearestNeighbourPixel at 0x7d072bf85120>)
-    makeSegSize = CPUDispatcher(<function makeSegSize at 0x7d072bf84900>)
-    makeSegmentLocations = CPUDispatcher(<function makeSegmentLocations at 0x7d072bf85a80>)
-    mergeSinglePixels = CPUDispatcher(<function mergeSinglePixels at 0x7d072bf85080>)
+    doMerge = CPUDispatcher(<function doMerge at 0x7e6aeceb8c20>)
+    eliminateSmallSegments = CPUDispatcher(<function eliminateSmallSegments at 0x7e6aeceb8680>)
+    findMergeSegment = CPUDispatcher(<function findMergeSegment at 0x7e6aeceb87c0>)
+    findNearestNeighbourPixel = CPUDispatcher(<function findNearestNeighbourPixel at 0x7e6aece99260>)
+    makeSegSize = CPUDispatcher(<function makeSegSize at 0x7e6aece98a40>)
+    makeSegmentLocations = CPUDispatcher(<function makeSegmentLocations at 0x7e6aece99bc0>)
+    mergeSinglePixels = CPUDispatcher(<function mergeSinglePixels at 0x7e6aece991c0>)
     print_function = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 1048576)
-    relabelSegments = CPUDispatcher(<function relabelSegments at 0x7d072bf85620>)
+    relabelSegments = CPUDispatcher(<function relabelSegments at 0x7e6aece99760>)
     spec = [('idx', uint32), ('rowcols', Array(uint32, 2, 'A', False, aligned=True))]

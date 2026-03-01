@@ -5,8 +5,8 @@
 ### class WorkerErrorRecord
       Hold a record of an exception raised in a remote worker.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; WorkerErrorRecord.\_\_init\_\_(self, exc, workerType)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WorkerErrorRecord.\_\_init\_\_(self, exc, workerType)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def addOverviews(ds)

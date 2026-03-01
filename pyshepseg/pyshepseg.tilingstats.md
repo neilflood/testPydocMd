@@ -26,104 +26,104 @@
         rz : ratzarr.RatZarr or None
           Open RatZarr object
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.CreateColumn(self, colName, colType)
-        Create the column with the given name and type. For GDAL RAT, always
-        use GFU_Generic usage
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.CreateColumn(self, colName, colType)
+          Create the column with the given name and type. For GDAL RAT, always
+          use GFU_Generic usage
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.SetRowCount(self, rowCount)
-        Set the row count for the table
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.SetRowCount(self, rowCount)
+          Set the row count for the table
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.WriteArray(self, colArr, colNumber, start)
-        Intended to look like GDAL's RAT WriteArray function.
-        
-        When the output RAT is a GDAL file, parameters are passed straight
-        through. When using a RatZarr file, the colNdx is translated to
-        a column name and the data written to that column.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.WriteArray(self, colArr, colNumber, start)
+          Intended to look like GDAL's RAT WriteArray function.
+          
+          When the output RAT is a GDAL file, parameters are passed straight
+          through. When using a RatZarr file, the colNdx is translated to
+          a column name and the data written to that column.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.\_\_init\_\_(self, ds=None, band=None, rz=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.\_\_init\_\_(self, ds=None, band=None, rz=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.checkColType(self, colName, colType)
-        Check that the given column (pre-existing) is compatible with
-        the given GDAL column type (gdal.GFT_*). Raise exception if not.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.checkColType(self, colName, colType)
+          Check that the given column (pre-existing) is compatible with
+          the given GDAL column type (gdal.GFT_*). Raise exception if not.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.close(self)
-        Close the open file handles
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.close(self)
+          Close the open file handles
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.colExists(self, colName)
-        Check if the named column already exists in the RAT
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.colExists(self, colName)
+          Check if the named column already exists in the RAT
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.getColNdx(self, colName)
-        Get the column index for the given name. The index is only meaningful
-        for GDAL-based RAT, but we fake it for Zarr-based, so we can
-        continue to use it as the basic identifier in the numba-compiled
-        sections of code (i.e. the statsSelection_fast structure).
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OpenRatContainer.getColNdx(self, colName)
+          Get the column index for the given name. The index is only meaningful
+          for GDAL-based RAT, but we fake it for Zarr-based, so we can
+          continue to use it as the basic identifier in the numba-compiled
+          sections of code (i.e. the statsSelection_fast structure).
 
-### class PyShepSegStatsError
+### class PyShepSegStatsError(Exception)
       Common base class for all non-exit exceptions.
 
-### class RatPage
+### class RatPage(RatPage)
       Hold a single page of the paged RAT
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.\_\_init\_\_(self, numIntCols, numFloatCols, startSegId, numSeg)
-        Allocate arrays for int and float columns. Int columns are
-        stored as signed int32, floats are float32. 
-        
-        startSegId is the segment ID number of the lowest segment in this page.
-        numSeg is the number of segments within this page, normally the
-        page size, but the last page will be smaller. 
-        
-        numIntCols and numFloatCols are as returned by makeFastStatsSelection().
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.\_\_init\_\_(self, numIntCols, numFloatCols, startSegId, numSeg)
+          Allocate arrays for int and float columns. Int columns are
+          stored as signed int32, floats are float32. 
+          
+          startSegId is the segment ID number of the lowest segment in this page.
+          numSeg is the number of segments within this page, normally the
+          page size, but the last page will be smaller. 
+          
+          numIntCols and numFloatCols are as returned by makeFastStatsSelection().
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.getIndexInPage(self, segId)
-        Return the index for the given segment, within the current
-        page. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.getIndexInPage(self, segId)
+          Return the index for the given segment, within the current
+          page. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.getRatVal(self, segId, colType, colArrayNdx)
-        Get the RAT entry for the given segment.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.getRatVal(self, segId, colType, colArrayNdx)
+          Get the RAT entry for the given segment.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.getSegmentComplete(self, segId)
-        Returns True if the segment has been flagged as complete
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.getSegmentComplete(self, segId)
+          Returns True if the segment has been flagged as complete
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.pageComplete(self)
-        Return True if the current page has been completed
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.pageComplete(self)
+          Return True if the current page has been completed
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.setRatVal(self, segId, colType, colArrayNdx, val)
-        Set the RAT entry for the given segment,
-        to be the given value. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.setRatVal(self, segId, colType, colArrayNdx, val)
+          Set the RAT entry for the given segment,
+          to be the given value. 
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; RatPage.setSegmentComplete(self, segId)
-        Flag that the given segment has had all stats calculated. 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RatPage.setSegmentComplete(self, segId)
+          Flag that the given segment has had all stats calculated. 
 
-### class SegPoint
+### class SegPoint(SegPoint)
       Class for handling a given data point and it's location
       in pixel space (within the whole image, not a tile).
       
       Used so that all the data for a given segment can be collected
       together even if the segment straddles a tile.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegPoint.\_\_init\_\_(self, x, y, val)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegPoint.\_\_init\_\_(self, x, y, val)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-### class SegmentStats
+### class SegmentStats(SegmentStats)
       Manage statistics for a single segment
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.\_\_init\_\_(self, segmentHistDict, missingStatsValue)
-        Construct with generic statistics, given a typed 
-        dictionary of the histogram counts of all values
-        in the segment.
-        
-        If there are no valid pixels then the value passed
-        in as missingStatsValue is returned for the requested
-        stats.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.\_\_init\_\_(self, segmentHistDict, missingStatsValue)
+          Construct with generic statistics, given a typed 
+          dictionary of the histogram counts of all values
+          in the segment.
+          
+          If there are no valid pixels then the value passed
+          in as missingStatsValue is returned for the requested
+          stats.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.getPercentile(self, percentile)
-        Return the pixel value for the given percentile, 
-        e.g. getPercentile(50) would return the median value of 
-        the segment
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.getPercentile(self, percentile)
+          Return the pixel value for the given percentile, 
+          e.g. getPercentile(50) would return the median value of 
+          the segment
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.getStat(self, statID, param)
-        Return the requested statistic
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentStats.getStat(self, statID, param)
+          Return the requested statistic
 
 ### class StatsReadConfig
       Set up configuration information for running read workers
@@ -140,8 +140,8 @@
           Number of seconds to wait to get tile data from read buffer.
           Only relevant if using read workers.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadConfig.\_\_init\_\_(self, numWorkers=0, bufferInsertTimeout=60, bufferPopTimeout=60)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadConfig.\_\_init\_\_(self, numWorkers=0, bufferInsertTimeout=60, bufferPopTimeout=60)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ### class StatsReadManager
       Open the input imgfile and segfile, optionally starting some
@@ -173,49 +173,49 @@
           A Timers object in which read timings are recorded. Default will
           discard timings.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.\_\_init\_\_(self, imgfile, imgbandnum, segfile=None, segbandnum=1, segband=None, readCfg=None, tileSize=None, numXtiles=None, numYtiles=None, timings=None)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.\_\_init\_\_(self, imgfile, imgbandnum, segfile=None, segbandnum=1, segband=None, readCfg=None, tileSize=None, numXtiles=None, numYtiles=None, timings=None)
+          Initialize self.  See help(type(self)) for accurate signature.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.close(self)
-        Close the GDAL objects
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.close(self)
+          Close the GDAL objects
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.popNextTile(self)
-        Get the data for the next tile. If using read workers, pop the next
-        available tile out of the buffer, otherwise just read in directly
-        from the files.
-        
-        In the buffer case, note that we may lose the strict tile ordering,
-        if a tile is available out of normal sequence. This is not generally
-        a serious problem, and avoids a potential deadlock condition if we
-        attempted to adhere to a strict order but read workers delivered them
-        a long way out of order. Mostly would not be a problem, but serious if
-        if it did occur.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.popNextTile(self)
+          Get the data for the next tile. If using read workers, pop the next
+          available tile out of the buffer, otherwise just read in directly
+          from the files.
+          
+          In the buffer case, note that we may lose the strict tile ordering,
+          if a tile is available out of normal sequence. This is not generally
+          a serious problem, and avoids a potential deadlock condition if we
+          attempted to adhere to a strict order but read workers delivered them
+          a long way out of order. Mostly would not be a problem, but serious if
+          if it did occur.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.readTile(self, segBand, imgBand, tileRow, tileCol)
-        Read a single tile from the two input rasters. The tile row/col
-        numbers refer to a grid of tiles, so the first row of tiles
-        is row 0, the second row is row 1, etc.
-        
-        Parameters
-        ----------
-          segBand, imgBand : gdal.Band
-            GDAL Band objects for segmentation and image rasters
-          tileRow : int
-            Row number of requested tile
-          tileCol : int
-            Col number of requested tile
-        
-        Returns
-        -------
-          tilePair : tuple of numpy.ndarray
-            Raster tiles as (tileSegments, tileImageData)
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.readTile(self, segBand, imgBand, tileRow, tileCol)
+          Read a single tile from the two input rasters. The tile row/col
+          numbers refer to a grid of tiles, so the first row of tiles
+          is row 0, the second row is row 1, etc.
+          
+          Parameters
+          ----------
+            segBand, imgBand : gdal.Band
+              GDAL Band objects for segmentation and image rasters
+            tileRow : int
+              Row number of requested tile
+            tileCol : int
+              Col number of requested tile
+          
+          Returns
+          -------
+            tilePair : tuple of numpy.ndarray
+              Raster tiles as (tileSegments, tileImageData)
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.startReadWorkers(self)
-        Start the requested read workers, and set up the buffer they
-        will feed into.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.startReadWorkers(self)
+          Start the requested read workers, and set up the buffer they
+          will feed into.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.worker(self)
-        Function running in each read worker
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StatsReadManager.worker(self)
+          Function running in each read worker
 
 ### class TiledStatsResult
       Result of tiled per-segment statistics
@@ -225,8 +225,8 @@
         timings : pyshepseg.timinghooks.Timers
           Timings for various key parts of the per-segment stats calculation
 
-#### &nbsp;&nbsp;&nbsp;&nbsp; TiledStatsResult.\_\_init\_\_(self)
-        Initialize self.  See help(type(self)) for accurate signature.
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TiledStatsResult.\_\_init\_\_(self)
+          Initialize self.  See help(type(self)) for accurate signature.
 
 ## Functions
 ### def calcPerSegmentSpatialStatsRIOS(imgfile, imgbandnum, segfile, colNamesAndTypes, userFunc, userParam=None, concurrencyStyle=None, missingStatsValue=-9999, outFile=None, outFileIsZarr=False)
@@ -729,7 +729,7 @@
     HAVE_RATZARR = False
     HAVE_RIOS = False
     NOPARAM = 4294967295
-    PTS_TYPE = instance.jitclass.SegPoint#7d072bd2bf10<x:uint32,y:uint32,val:int64>
+    PTS_TYPE = instance.jitclass.SegPoint#7e6aecc0c1d0<x:uint32,y:uint32,val:int64>
     RAT_PAGE_SIZE = 100000
     STATID_MAX = 1
     STATID_MEAN = 2
@@ -748,22 +748,22 @@
     STAT_DTYPE_FLOAT = 1
     STAT_DTYPE_INT = 0
     SegPointSpec = [('x', uint32), ('y', uint32), ('val', int64)]
-    accumulateSegDict = CPUDispatcher(<function accumulateSegDict at 0x7d072bd17880>)
-    accumulateSegSpatial = CPUDispatcher(<function accumulateSegSpatial at 0x7d072b7df7e0>)
-    calcStatsForCompletedSegs = CPUDispatcher(<function calcStatsForCompletedSegs at 0x7d072bd17a60>)
-    calcStatsForCompletedSegsSpatial = CPUDispatcher(<function calcStatsForCompletedSegsSpatial at 0x7d072b4999e0>)
-    checkSegComplete = CPUDispatcher(<function checkSegComplete at 0x7d072bd17920>)
-    checkSegCompleteSpatial = CPUDispatcher(<function checkSegCompleteSpatial at 0x7d072bd318a0>)
-    convertPtsInto2DArray = CPUDispatcher(<function convertPtsInto2DArray at 0x7d072bd32160>)
-    convertPtsInto2DMaskArray = CPUDispatcher(<function convertPtsInto2DMaskArray at 0x7d072b50bce0>)
-    getRatPageId = CPUDispatcher(<function getRatPageId at 0x7d072b498860>)
-    getSortedKeysAndValuesForDict = CPUDispatcher(<function getSortedKeysAndValuesForDict at 0x7d072bd30400>)
+    accumulateSegDict = CPUDispatcher(<function accumulateSegDict at 0x7e6aecbf39c0>)
+    accumulateSegSpatial = CPUDispatcher(<function accumulateSegSpatial at 0x7e6aec4227a0>)
+    calcStatsForCompletedSegs = CPUDispatcher(<function calcStatsForCompletedSegs at 0x7e6aecbf3ba0>)
+    calcStatsForCompletedSegsSpatial = CPUDispatcher(<function calcStatsForCompletedSegsSpatial at 0x7e6aec3a1ee0>)
+    checkSegComplete = CPUDispatcher(<function checkSegComplete at 0x7e6aecbf3a60>)
+    checkSegCompleteSpatial = CPUDispatcher(<function checkSegCompleteSpatial at 0x7e6aec4228e0>)
+    convertPtsInto2DArray = CPUDispatcher(<function convertPtsInto2DArray at 0x7e6aecc099e0>)
+    convertPtsInto2DMaskArray = CPUDispatcher(<function convertPtsInto2DMaskArray at 0x7e6aec407ec0>)
+    getRatPageId = CPUDispatcher(<function getRatPageId at 0x7e6aec3a0720>)
+    getSortedKeysAndValuesForDict = CPUDispatcher(<function getSortedKeysAndValuesForDict at 0x7e6aecc08540>)
     numbaTypeForImageType = int64
     ratPageSpec = [('startSegId', uint32), ('intcols', Array(int64, 2, 'A', False, aligned=True)), ('floatcols', Array(float32, 2, 'A', False, aligned=True)), ('complete', Array(bool, 1, 'A', False, aligned=True))]
     ratzarr = None
     segIdNumbaType = uint32
     segStatsSpec = [('pixVals', Array(int64, 1, 'A', False, aligned=True)), ('counts', Array(uint32, 1, 'A', False, aligned=True)), ('pixCount', uint32), ('min', int64), ('max', int64), ('mean', float32), ('stddev', float32), ('median', int64), ('mode', int64), ('missingStatsValue', int64)]
     statIDdict = {'min': 0, 'max': 1, 'mean': 2, 'stddev': 3, 'median': 4, 'mode': 5, 'percentile': 6, 'pixcount': 7}
-    userFuncMeanCoord = CPUDispatcher(<function userFuncMeanCoord at 0x7d072bd30a40>)
-    userFuncNumEdgePixels = CPUDispatcher(<function userFuncNumEdgePixels at 0x7d072bd314e0>)
-    userFuncVariogram = CPUDispatcher(<function userFuncVariogram at 0x7d072bd304a0>)
+    userFuncMeanCoord = CPUDispatcher(<function userFuncMeanCoord at 0x7e6aecc08b80>)
+    userFuncNumEdgePixels = CPUDispatcher(<function userFuncNumEdgePixels at 0x7e6aecc09620>)
+    userFuncVariogram = CPUDispatcher(<function userFuncVariogram at 0x7e6aecc085e0>)
