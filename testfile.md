@@ -11,7 +11,12 @@
     anim id est laborum.
 
 ## Classes
-### class MyClass(MySuperClass)
+### class MyBaseClass
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyBaseClass.baseFunc(self)
+          This method is on the super class
+
+### class MyClass(MyBaseClass)
       Class docstring
       
       Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus
@@ -53,11 +58,6 @@
           -------
             retVal : str
               Some sort of string is returned
-
-### class MySuperClass
-
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MySuperClass.baseFunc(self)
-          This method is on the super class
 
 ## Functions
 ### def someFunc(arg1, arg2, arg3)
