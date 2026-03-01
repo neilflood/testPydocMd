@@ -23,41 +23,41 @@
       lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti
       sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyClass.\_\_init\_\_(self, arg1)
-         Docstring for constructor
-         
-         Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
-         faucibus ex sapien vitae pellentesque sem placerat. In id cursus
-         mi pretium tellus duis convallis.
-         
-         Parameters
-         ----------
-           arg1 : str
-             Some description of arg1
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyClass.\_\_init\_\_(self, arg1)
+          Docstring for constructor
+          
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
+          faucibus ex sapien vitae pellentesque sem placerat. In id cursus
+          mi pretium tellus duis convallis.
+          
+          Parameters
+          ----------
+            arg1 : str
+              Some description of arg1
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyClass.doSomething(self, arg1, arg2)
-         Docstring for simple method
-         
-         This method does something of great value, using just two arguments. I have
-         no idea what it does, but here is a verbose description of it.
-         
-         Parameters
-         ----------
-           arg1 : int
-             The first argument is pretty important
-           arg2 : float
-             The second argument is also important. Infact, it is so important
-             that its description runs over two lines
-         
-         Returns
-         -------
-           retVal : str
-             Some sort of string is returned
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyClass.doSomething(self, arg1, arg2)
+          Docstring for simple method
+          
+          This method does something of great value, using just two arguments. I have
+          no idea what it does, but here is a verbose description of it.
+          
+          Parameters
+          ----------
+            arg1 : int
+              The first argument is pretty important
+            arg2 : float
+              The second argument is also important. Infact, it is so important
+              that its description runs over two lines
+          
+          Returns
+          -------
+            retVal : str
+              Some sort of string is returned
 
 ### class MySuperClass
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MySuperClass.baseFunc(self)
-         This method is on the super class
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MySuperClass.baseFunc(self)
+          This method is on the super class
 
 ## Functions
 ### def someFunc(arg1, arg2, arg3)
