@@ -12,7 +12,7 @@
 ### def popFromQue(que)
         Pop out the next item from the given Queue, returning None if
         the queue is empty.
-        
+
         WARNING: don't use this if the queued items can be None
 
 ### def pyshepsegRemoteSegmentationWorker(workerID, host, port, authkey)

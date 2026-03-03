@@ -1,37 +1,37 @@
 # pyshepseg.tiling
-    Routines in support of tiled segmentation of very large rasters. 
-    
+    Routines in support of tiled segmentation of very large rasters.
+
     Main entry routine is doTiledShepherdSegmentation(). See that
-    function for further details. 
-    
+    function for further details.
+
     The broad idea is that the Shepherd segmentation algorithm, as
-    implemented in the shepseg module, runs entirely in memory. 
-    For larger raster files, it is more efficient to divide the raster 
+    implemented in the shepseg module, runs entirely in memory.
+    For larger raster files, it is more efficient to divide the raster
     into tiles, segment each tile individually, and stitch the
-    results together to create a segmentation of the whole raster. 
-    
+    results together to create a segmentation of the whole raster.
+
     The main caveats arise from the fact that the initial clustering
-    is performed on a uniform subsample of the whole image, in 
-    order to give consistent segment boundaries at tile intersections. 
-    This means that for a larger raster, with a greater range of 
-    spectra, one may wish to increase the number of clusters in order 
-    to allow sufficient initial segments to characterize the variation. 
-    
+    is performed on a uniform subsample of the whole image, in
+    order to give consistent segment boundaries at tile intersections.
+    This means that for a larger raster, with a greater range of
+    spectra, one may wish to increase the number of clusters in order
+    to allow sufficient initial segments to characterize the variation.
+
     Related to this, one may also consider reducing the percentile
-    used for automatic estimation of maxSpectralDiff (see 
+    used for automatic estimation of maxSpectralDiff (see
     :func:`pyshepseg.shepseg.doShepherdSegmentation` and
     :func:`pyshepseg.shepseg.autoMaxSpectralDiff` for further details).
-    
-    Because of these caveats, one should be very cautious about 
-    segmenting something like a continental-scale image. There is a 
-    lot of spectral variation across an area like a whole continent, 
+
+    Because of these caveats, one should be very cautious about
+    segmenting something like a continental-scale image. There is a
+    lot of spectral variation across an area like a whole continent,
     and it may be unwise to use all the same parameters for the
-    whole area. 
+    whole area.
 
 ## Classes
 ### class FargateConfig
       Configuration for AWS Fargate (i.e. for use with CONC_FARGATE).
-      
+
       Parameters
       ----------
         containerImage : str
@@ -91,7 +91,7 @@
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.addTwoHistograms(hist1, hist2)
           Add the two given histograms together, and return the result.
-          
+
           If one is longer than the other, the shorter one is added to it.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HistogramAccumulator.doHistAccum(self, arr)
@@ -105,9 +105,9 @@
 ### class NetworkDataChannel
       Single class to manage communication with workers running on different
       machines. Uses the facilities in multiprocessing.managers.
-      
+
       Created from either the server or the client end, the constructor
-      takes 
+      takes
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NetworkDataChannel.\_\_init\_\_(self, inQue=None, segResultCache=None, forceExit=None, exceptionQue=None, segDataDict=None, readSemaphore=None, timings=None, workerBarrier=None, hostname=None, portnum=None, authkey=None)
           Initialize self.  See help(type(self)) for accurate signature.
@@ -121,12 +121,12 @@
           needed. If left to the garbage collector and/or the interpreter
           exit code, things are shut down in the wrong order, and the
           interpreter hangs on exit.
-          
+
           I have tried __del__, also weakref.finalize and atexit.register,
           and none of them avoid these problems. So, just make sure you
           call shutdown explicitly, in the process which created the
           NetworkDataChannel.
-          
+
           The client processes don't seem to care, presumably because they
           are not running the server thread. Calling shutdown on the client
           does nothing.
@@ -230,20 +230,20 @@
 
 ### class SegmentationConcurrencyConfig
       Configuration for concurrency in segmentation of multiple tiles.
-      
+
       The segmentation of each tile can be performed concurrently by individual
       workers. However, the stitching together of the resulting tiles is
       inherently sequential, and with sufficient workers, this easily becomes
       the dominant operation. Adding more workers after this simply increases
       the memory usage for tiles waiting to be stitched (up to segResultCacheSize),
       without any further speedup.
-      
+
       It is recommended that the user begin with a small number of workers, and
       inspect the timings (see :func:`pyshepseg.utils.formatTimingRpt`) and
       increase the number of workers so as to reduce ``stitchwaitfortile`` time.
       When this no longer decreases, there is no further benefit to adding more
       workers.
-      
+
       Parameters
       ----------
         concurrencyType : One of {CONC_NONE, CONC_THREADS, CONC_FARGATE, CONC_SUBPROC}
@@ -285,14 +285,14 @@
           Check the final segmentation for any empty segments. These
           can be problematic later, and should be avoided. Prints a
           warning message if empty segments are found.
-          
+
           Parameters
           ----------
             hist : ndarray of uint32
               Histogram counts for the segmentation raster
             overlapSize : int
               Number of pixels to use in overlaps between tiles
-          
+
           Returns
           -------
             hasEmptySegments : bool
@@ -307,7 +307,7 @@
           given overlap. If it does not, then it will lie entirely within
           exactly one tile, but if it does cross, then it will need to be
           re-coded across the midline.
-          
+
           Parameters
           ----------
             overlap : shepseg.SegIdType ndarray (overlapNrows, overlapNcols)
@@ -317,7 +317,7 @@
               pixels for the segment of interest
             orientation : {HORIZONTAL, VERTICAL}
               Indicates the orientation of the midline
-          
+
           Returns
           -------
             crosses : bool
@@ -337,14 +337,14 @@
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.overlapCacheKey(col, row, edge)
           Return the temporary cache key used for the overlap array
-          
+
           Parameters
           ----------
             col, row : int
               Tile column & row numbers
             edge : {right', 'bottom'}
               Indicates from which edge of the given tile the overlap is taken
-          
+
           Returns
           -------
             cachekey : str
@@ -353,32 +353,32 @@
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.popFromQue(que)
           Pop out the next item from the given Queue, returning None if
           the queue is empty.
-          
+
           WARNING: don't use this if the queued items can be None
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.recodeSharedSegments(tileData, overlapA, overlapB, orientation, recodeDict)
           Work out a mapping which recodes segment ID numbers from
-          the tile in tileData. Segments to be recoded are those which 
-          are in the overlap with an earlier tile, and which cross the 
-          midline of the overlap, which is where the stitchline between 
-          the tiles will fall. 
-          
-          Updates recodeDict, which is a dictionary keyed on the 
-          existing segment ID numbers, where the value of each entry 
-          is the segment ID number from the earlier tile, to be used 
-          to recode the segment in the current tile. 
-          
+          the tile in tileData. Segments to be recoded are those which
+          are in the overlap with an earlier tile, and which cross the
+          midline of the overlap, which is where the stitchline between
+          the tiles will fall.
+
+          Updates recodeDict, which is a dictionary keyed on the
+          existing segment ID numbers, where the value of each entry
+          is the segment ID number from the earlier tile, to be used
+          to recode the segment in the current tile.
+
           overlapA and overlapB are numpy arrays of pixels in the overlap
           region in question, giving the segment ID numbers in the two tiles.
           The values in overlapB are from the earlier tile, and those in
           overlapA are from the current tile.
-          
+
           It is critically important that the overlapping region is either
-          at the top or the left of the current tile, as this means that 
-          the row and column numbers of pixels in the overlap arrays 
+          at the top or the left of the current tile, as this means that
+          the row and column numbers of pixels in the overlap arrays
           match the same pixels in the full tile. This cannot be used
           for overlaps on the right or bottom of the current tile.
-          
+
           Parameters
           ----------
             tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
@@ -396,13 +396,13 @@
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.recodeTile(self, tileData, maxSegId, tileRow, tileCol, top, bottom, left, right)
           Adjust the segment ID numbers in the current tile, to make them
           globally unique (and contiguous) across the whole mosaic.
-          
+
           Make use of the overlapping regions of tiles above and left,
-          to identify shared segments, and recode those to segment IDs 
-          from the adjacent tiles (i.e. we change the current tile, not 
-          the adjacent ones). Non-shared segments are increased so they 
-          are larger than previous values. 
-          
+          to identify shared segments, and recode those to segment IDs
+          from the adjacent tiles (i.e. we change the current tile, not
+          the adjacent ones). Non-shared segments are increased so they
+          are larger than previous values.
+
           Parameters
           ----------
             tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
@@ -416,7 +416,7 @@
             top, bottom, left, right : int
               Pixel coordinates *within tile* of the non-overlap region of
               the tile.
-          
+
           Returns
           -------
             newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
@@ -424,16 +424,16 @@
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.relabelSegments(tileData, recodeDict, maxSegId, top, bottom, left, right)
           Recode the segment IDs in the given tileData array.
-          
+
           For segment IDs which are keys in recodeDict, these
-          are replaced with the corresponding entry. For all other 
+          are replaced with the corresponding entry. For all other
           segment IDs, they are replaced with sequentially increasing
           ID numbers, starting from one more than the previous
-          maximum segment ID (maxSegId). 
-          
-          A re-coded copy of tileData is created, the original is 
+          maximum segment ID (maxSegId).
+
+          A re-coded copy of tileData is created, the original is
           unchanged.
-          
+
           Parameters
           ----------
             tileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
@@ -446,7 +446,7 @@
             top, bottom, left, right : int
               Pixel coordinates *within tile* of the non-overlap region of
               the tile.
-          
+
           Returns
           -------
               newTileData : shepseg.SegIdType ndarray (tileNrows, tileNcols)
@@ -462,7 +462,7 @@
           of segmentation workers, each working independently on individual
           tiles. The tiles to process are sent via a Queue, and the computed
           results are returned via the SegmentationResultCache.
-          
+
           Stitching the tiles together is run in the main thread, beginning as
           soon as the first tile is completed.
 
@@ -486,10 +486,10 @@
           Start segmentation workers, if required
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.stitchTiles(self)
-          Recombine individual tiles into a single segment raster output 
+          Recombine individual tiles into a single segment raster output
           file. Segment ID values are recoded to be unique across the whole
           raster, and contiguous.
-          
+
           Sets maxSegId and outDs on self.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SegmentationConcurrencyMgr.writeHistogramToFile(outBand, histAccum)
@@ -515,15 +515,15 @@
           the cache.
 
 ### class TileInfo
-      Class that holds the pixel coordinates of the tiles within 
-      an image. 
+      Class that holds the pixel coordinates of the tiles within
+      an image.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.\_\_init\_\_(self)
           Initialize self.  See help(type(self)) for accurate signature.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.addTile(self, xpos, ypos, xsize, ysize, col, row)
           Add a new tile to the set
-          
+
           Parameters
           ----------
             xpos, ypos : int
@@ -535,7 +535,7 @@
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.getNumTiles(self)
           Get total number of tiles in the set
-          
+
           Returns
           -------
             numTiles : int
@@ -544,12 +544,12 @@
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TileInfo.getTile(self, col, row)
           Return the position and shape of the requested tile, as
           a single tuple of values
-          
+
           Parameters
           ----------
             col, row : int
               Tile column & row
-          
+
           Returns
           -------
             xpos, ypos : int
@@ -559,7 +559,7 @@
 
 ### class TiledSegmentationResult
       Result of tiled segmentation
-      
+
       Attributes
       ----------
         maxSegId : shepseg.SegIdType
@@ -592,22 +592,22 @@
 ### def calcHistogramTiled(segfile, maxSegId, writeToRat=True)
         This function is now deprecated, and will probably be removed in
         a future version.
-        
+
         Calculate a histogram of the given segment image file.
-        
+
         Note that we need this function because GDAL's GetHistogram
         function does not seem to work when attempting a histogram
         with very large numbers of entries. We want an entry for
         every segment, rather than an approximate count for a range of
         segment values, and the number of segments is very large. So,
-        we need to write our own routine. 
-        
+        we need to write our own routine.
+
         It works in tiles across the image, so that it can process
         very large images in a memory-efficient way.
-        
+
         For a raster which can easily fit into memory, a histogram
         can be calculated directly using :func:`pyshepseg.shepseg.makeSegSize`.
-        
+
         Parameters
         ----------
           segfile : str or gdal.Dataset
@@ -620,7 +620,7 @@
             file's raster attribute table. If segfile was given as a Dataset
             object, it would therefore need to have been opened with update
             access.
-        
+
         Returns
         -------
           hist : int ndarray (numSegments+1, )
@@ -631,18 +631,18 @@
         manner, suitable for large raster files. Runs the segmentation
         on separate (overlapping) tiles across the raster, then stitches these
         together into a single output segment raster.
-        
+
         The initial spectral clustering is performed on a sub-sample
-        of the whole raster (using fitSpectralClustersWholeFile), 
-        to create consistent clusters. These are then used as seeds 
-        for all individual tiles. Note that subsamplePcnt is used at 
-        this stage, over the whole raster, and is not passed through to 
+        of the whole raster (using fitSpectralClustersWholeFile),
+        to create consistent clusters. These are then used as seeds
+        for all individual tiles. Note that subsamplePcnt is used at
+        this stage, over the whole raster, and is not passed through to
         shepseg.doShepherdSegmentation() for any further sub-sampling.
-        
-        Most of the arguments are passed through to 
+
+        Most of the arguments are passed through to
         shepseg.doShepherdSegmentation, and are described in the docstring
         for that function.
-        
+
         Parameters
         ----------
           infile : str
@@ -703,7 +703,7 @@
           concurrencyCfg : SegmentationConcurrencyConfig
             Configuration for segmentation concurrency. Default is None,
             meaning no concurrency.
-        
+
         Returns
         -------
           tileSegResult : TiledSegmentationResult
@@ -711,9 +711,9 @@
 ### def fitSpectralClustersWholeFile(inDs, bandNumbers, numClusters=60, subsamplePcnt=None, imgNullVal=None, fixedKMeansInit=False)
         Given an open raster Dataset, read a selected sample of pixels
         and use these to fit a spectral cluster model. Uses GDAL
-        to read the pixels, and shepseg.fitSpectralClusters() 
+        to read the pixels, and shepseg.fitSpectralClusters()
         to do the fitting.
-        
+
         Parameters
         ----------
           inDs : gdal.Dataset
@@ -736,7 +736,7 @@
           fixedKMeansInit : bool
             If True, then use a fixed estimate for the initial KMeans cluster
             centres. See shepseg.fitSpectralClusters() for details.
-        
+
         Returns
         -------
           kmeansObj : sklearn.cluster.KMeans
@@ -748,19 +748,19 @@
 
 ### def getImgNullValue(inDs, bandNumbers)
         Return the null value for the given dataset
-        
+
         Parameters
         ----------
           inDs : gdal.Dataset
             Open input Dataset
           bandNumbers : list of int
             GDAL band numbers of interest
-        
+
         Returns
         -------
           imgNullVal : float or None
             Null value from input raster, None if there is no null value
-        
+
         Raises
         ------
           PyShepSegTilingError
@@ -769,7 +769,7 @@
 ### def getTilesForFile(ds, tileSize, overlapSize)
         Return a TileInfo object for a given file and input
         parameters.
-        
+
         Parameters
         ----------
           ds : gdal.Dataset
@@ -780,7 +780,7 @@
             to ensure we do not use very small tiles
           overlapSize : int
             Number of pixels by which tiles will overlap
-        
+
         Returns
         -------
           tileInfo : TileInfo
@@ -788,16 +788,16 @@
             across the raster
 
 ### def readSubsampledImageBand(bandObj, subsampleProp)
-        Read in a sub-sampled copy of the whole of the given band. 
-        
-        Note that one can, in principle, do this directly using GDAL. 
+        Read in a sub-sampled copy of the whole of the given band.
+
+        Note that one can, in principle, do this directly using GDAL.
         However, if overview layers are present in the file, it will use
-        these, and so is dependent on how these were created. Since 
+        these, and so is dependent on how these were created. Since
         these are often created just for display purposes, past experience
-        has shown that they are not always to be trusted as data, 
-        so we have chosen to always go directly to the full resolution 
-        image. 
-        
+        has shown that they are not always to be trusted as data,
+        so we have chosen to always go directly to the full resolution
+        image.
+
         Parameters
         ----------
           bandObj : gdal.Band
@@ -805,7 +805,7 @@
           subsampleProp : float
             The proportion by which to sub-sample (i.e. a value between
             zero and 1, applied to rows and columns separately)
-        
+
         Returns
         -------
           imgSub : <dtype> ndarray (nRowsSub, nColsSub)
@@ -814,6 +814,9 @@
 
 ### def selectConcurrencyClass(concurrencyType, baseClass)
         Choose the sub-class corresponding to the given concurrencyType
+
+### def updateCounts(tileData, hist)
+        Fast function to increment counts for each segment ID in the given tile
 
 ## Values
     BOTTOM_OVERLAP = 'bottom'
@@ -832,4 +835,3 @@
     VERTICAL = 1
     boto3 = None
     segIdNumbaType = uint32
-    updateCounts = CPUDispatcher(<function updateCounts at 0x7e6aecd32fc0>)

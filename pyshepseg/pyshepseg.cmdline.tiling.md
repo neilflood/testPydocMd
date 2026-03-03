@@ -1,5 +1,5 @@
 # pyshepseg.cmdline.tiling
-    Testing harness for running pyshepseg in the tiling mode. 
+    Testing harness for running pyshepseg in the tiling mode.
     Handy for running a basic segmentation
     but it is suggested that users call the module directly from a Python
     script and handle things like scaling the data in an appripriate

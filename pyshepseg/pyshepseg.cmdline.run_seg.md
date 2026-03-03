@@ -15,12 +15,12 @@
         a tuple of the image array and the null value.
 
 ### def writeClusterCentresToMetadata(bandObj, km)
-        Pulls out the cluster centres from the kmeans object 
+        Pulls out the cluster centres from the kmeans object
         and writes them to the metadata (under CLUSTER_CNTRS_METADATA_NAME)
         for the given band object.
 
 ### def writeOutput(cmdargs, seg, segSize, spectSum, kmeansObj)
-        Write the segmentation to an output image file. Includes a 
+        Write the segmentation to an output image file. Includes a
         colour table
 
 ## Values

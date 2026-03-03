@@ -1,9 +1,9 @@
 # pyshepseg.cmdline.runtests
-    Run tests of the pyshepseg package. Use a generated dataset, sufficient 
-    to allow a meaningful segmentation. Note that the generated dataset is not 
+    Run tests of the pyshepseg package. Use a generated dataset, sufficient
+    to allow a meaningful segmentation. Note that the generated dataset is not
     sufficiently complex to be a strong test of the Shepherd segmentation
     algorithm, but merely whether this implementation of the algorithm is
-    coded to behave sensibly. 
+    coded to behave sensibly.
 
 ## Functions
 ### def checkRatColumns(segfile, ratfile, fileIsRatZarr, allStatsCols)
@@ -12,13 +12,13 @@
         but the ratfile could be RatZarr.
 
 ### def checkSegmentation(imgfile, segfile, meanColNames, stdColNames)
-        Check whether the given segmentation of the given image file 
-        is "correct", by some measure(s). 
+        Check whether the given segmentation of the given image file
+        is "correct", by some measure(s).
 
 ### def checkSpatialColumns(segfile, eastingCol, northingCol)
         Do a quick check of eastingCol and northingCol which were
         calculated using calcPerSegmentSpatialStatsTiled().
-        
+
         Returns True if the calculated coordinates are the same
         as the actual coordinates (within a tolerance).
 
@@ -30,28 +30,28 @@
 
 ### def createMultispectral(truesegfile, outfile)
         Reads the given true segment file, and generates a multi-spectral
-        image which should segment in a similar way. 
+        image which should segment in a similar way.
 
 ### def createPallete(numSeg)
-        Return a "pallete" of 3-band colours, one for each segment. 
-        
+        Return a "pallete" of 3-band colours, one for each segment.
+
         The colours are just made up, and have no particular meaning. The
-        main criterion is that they be distinct, sufficiently so that 
-        two adjacent segments should always come out in different colours. 
-        
-        Return value is an array of shape (numSeg, 3). Individual colour 
-        values are in the range [0, 10000], and so the array has type uint16. 
-        
-        Note that the index into this array would be (segmentID - 1). 
+        main criterion is that they be distinct, sufficiently so that
+        two adjacent segments should always come out in different colours.
+
+        Return value is an array of shape (numSeg, 3). Individual colour
+        values are in the range [0, 10000], and so the array has type uint16.
+
+        Note that the index into this array would be (segmentID - 1).
 
 ### def generateTrueSegments(outfile)
         This routine generates the true segments from the initial segment
-        centres hardwired in the initialCentres variable. 
-        
-        Each pixel is in the segment for its closest centre coordinate. 
-        
+        centres hardwired in the initialCentres variable.
+
+        Each pixel is in the segment for its closest centre coordinate.
+
         Saves the generated segment layer into the given raster filename,
-        with format KEA. 
+        with format KEA.
 
 ### def getCmdargs()
         Get command line arguments
@@ -63,9 +63,9 @@
         Add some columns to the RAT, with useful per-segment statistics
 
 ### def makeSpatialRATColumns(segfile, imagefile, outFile=None, outFileIsZarr=False, useRIOS=False, numReadWorkers=0)
-        Create some RAT columns for checking the spatial stats 
-        functionality. 
-        
+        Create some RAT columns for checking the spatial stats
+        functionality.
+
         Here we use the tilingstats.userFuncMeanCoord function passed to
         calcPerSegmentSpatialStatsTiled so that the mean eastings and northings
         are calculated. These can be easily checked later on.
@@ -74,11 +74,11 @@
         Read the given column from the given RAT file. Copes with either
         a GDAL-based RAT or a RatZarr file, determined by the fileIsRatZarr
         parameter.
-        
-        Return an array of the column values. 
+
+        Return an array of the column values.
 
 ### def readSeg(segfile, xoff=0, yoff=0, win_xsize=None, win_ysize=None)
-        Open and read the given segfile. Return an image array of the 
+        Open and read the given segfile. Return an image array of the
         segment ID values
 
 ### def vecPcntDiff(v1, v2)
