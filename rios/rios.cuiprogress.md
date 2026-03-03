@@ -1,5 +1,5 @@
 # rios.cuiprogress
-    Progress bars using CUI interface. 
+    Progress bars using CUI interface.
 
 ## Classes
 ### class CUIProgressBar
@@ -52,9 +52,9 @@
 
 ### class LogProgressBar
       A progress object specifically for printing to logs.
-      The other progress objects here don't print to logs - 
+      The other progress objects here don't print to logs -
       only terminals. This saves unecessary info being put
-      into the log but does make it difficult to monitor a 
+      into the log but does make it difficult to monitor a
       job from the logs.
       To avoid too much information being saved to the log
       only unique percentages are printed.
@@ -81,7 +81,7 @@
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LogProgressBar.wasCancelled(self)
 
 ### class SilentProgress
-      A progress object which is completely silent. 
+      A progress object which is completely silent.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SilentProgress.\_\_init\_\_(self)
           Initialize self.  See help(type(self)) for accurate signature.

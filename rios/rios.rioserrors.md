@@ -1,5 +1,5 @@
 # rios.rioserrors
-    All exceptions used within rios. 
+    All exceptions used within rios.
 
 ## Classes
 ### class ArrayShapeError(RiosError)
@@ -107,7 +107,7 @@
         and line number of the call to the function which called this.
         The stacklevel argument controls how many stack levels above this
         gives the line number.
-        
+
         Implemented in mimcry of warnings.warn(), which seems very flaky.
         Sometimes it prints, and sometimes not, unless PYTHONWARNINGS is set
         (or -W is used). This function at least seems to work consistently.

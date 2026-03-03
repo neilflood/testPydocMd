@@ -1,5 +1,5 @@
 # rios.riostests.teststats
-    Test the calculation of statistics by rios.calcstats. 
+    Test the calculation of statistics by rios.calcstats.
 
 ## Classes
 ### class Stats
@@ -9,26 +9,26 @@
 
 ## Functions
 ### def calcMode(a, axis=0)
-        Copied directly from scipy.stats.mode(), so as not to have a dependency on scipy. 
+        Copied directly from scipy.stats.mode(), so as not to have a dependency on scipy.
 
 ### def checkHistogram(band, imgArr, nullVal, iterationName)
         Do simple check(s) on the histogram
 
 ### def compareStats(stats1, stats2, iterationName, relativeTolerance)
         Compare two Stats instances, and report differences. Also
-        return True if all OK. 
+        return True if all OK.
 
 ### def doAllNull(info, inputs, outputs, otherargs)
         Called from RIOS. Write an output which is all nulls
 
 ### def doit(info, inputs, outputs, otherargs)
         Called from RIOS.
-        
+
         Re-write the input, with scaling and change of datatype
 
 ### def equalTol(a, b, tol)
         Compare two values to within a tolerance. If the difference
-        between the two values is smaller than the tolerance, 
+        between the two values is smaller than the tolerance,
         then return True
 
 ### def getStatsFloatVal(band, metadataName)
@@ -36,7 +36,7 @@
         it is not present
 
 ### def getStatsFromArray(arr, nullVal)
-        Work out the statistics directly from the image array. 
+        Work out the statistics directly from the image array.
         Return a Stats instance
 
 ### def getStatsFromBand(band)

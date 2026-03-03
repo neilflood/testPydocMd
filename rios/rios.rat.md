@@ -1,11 +1,11 @@
 # rios.rat
     This module contains routines for reading and writing Raster
-    Attribute Tables (RATs). These are designed to be able to 
+    Attribute Tables (RATs). These are designed to be able to
     be called from outside of RIOS.
-    
-    Within RIOS, these are called from the :class:`rios.imagewriter.ImageWriter 
+
+    Within RIOS, these are called from the :class:`rios.imagewriter.ImageWriter
     and :class:`rios.fileinfo.ImageInfo` classes.
-    
+
     **Note:** It is recommended that the newer :mod:`rios.ratapplier` module be used instead of this
     interface for large tables where possible.
 
@@ -13,7 +13,7 @@
 ### class str
       str(object='') -> str
       str(bytes_or_buffer[, encoding[, errors]]) -> str
-      
+
       Create a new string object from the given object. If encoding or
       errors is specified, then the object must expose a data buffer
       that will be decoded using the given encoding and error handler.
@@ -26,44 +26,44 @@
 ### def genColorTable(numEntries, colortype)
         Generate a colour table array. The type of colour table generated
         is controlled by the colortype string. Possible values are:
-        
+
             * "rainbow"
             * "gray"
             * "random"
-        
-        See corresponding genColorTable_<colortype> function for details of each. 
+
+        See corresponding genColorTable_<colortype> function for details of each.
 
 ### def genColorTable_gray(numEntries)
-        Generate a color table array with the given number of entries, with all 
-        colors being shades of grey. First entry is black, last entry is white. 
-        
-        Returns the array as a 4 column array, suitable for use with the 
-        :func:`rios.rat.setColorTable` function. 
+        Generate a color table array with the given number of entries, with all
+        colors being shades of grey. First entry is black, last entry is white.
+
+        Returns the array as a 4 column array, suitable for use with the
+        :func:`rios.rat.setColorTable` function.
 
 ### def genColorTable_rainbow(numEntries)
         Generate a color table array with the given number of entries, with colors notionally
         describing a rainbow (i.e. red-orange-yellow-green-blue-indigo-violet). Probably
-        not what a painter would call a rainbow, but it will do. 
-        
-        Returns the array as a 4 column array, suitable for use with the 
-        :func:`rios.rat.setColorTable` function. 
+        not what a painter would call a rainbow, but it will do.
+
+        Returns the array as a 4 column array, suitable for use with the
+        :func:`rios.rat.setColorTable` function.
 
 ### def genColorTable_random(numEntries)
-        Generate a color table array with the given number of entries by assigning 
+        Generate a color table array with the given number of entries by assigning
         random red/green/blue values. No attempt is made to always generate
         unique colours, i.e. it is randomly possibly for different entries to
-        have the same colour. 
-        
-        Returns the array as a 4 column array, suitable for use with the 
-        :func:`rios.rat.setColorTable` function. 
+        have the same colour.
+
+        Returns the array as a 4 column array, suitable for use with the
+        :func:`rios.rat.setColorTable` function.
 
 ### def getColorTable(imgFile, bandNumber=1)
         Given either an open gdal dataset, or a filename,
         reads the color table as an array that can be passed
         to rat.setColorTable()
-        
+
         The returned colour table is a numpy array, described in detail
-        in the docstring for rat.setColorTable(). 
+        in the docstring for rat.setColorTable().
 
 ### def getColumnNames(imgFile, bandNumber=1)
         Given either an open gdal dataset, or a filename,
@@ -108,32 +108,32 @@
         numpy's StringDType, i.e. an array of variable-length Unicode strings.
 
 ### def setColorTable(imgfile, colorTblArray, layernum=1)
-        Set the color table for the specified band. You can specify either 
+        Set the color table for the specified band. You can specify either
         the imgfile as either a filename string or a gdal.Dataset object. The
-        layer number defaults to 1, i.e. the first layer in the file. 
-        
-        The color table is given as a numpy array of 5 columns. There is one row 
+        layer number defaults to 1, i.e. the first layer in the file.
+
+        The color table is given as a numpy array of 5 columns. There is one row
         (i.e. first array index) for every value to be set, and the columns
         are:
-        
+
             * pixelValue
             * Red
             * Green
             * Blue
             * Opacity
-            
-        The Red/Green/Blue values are on the range 0-255, with 255 meaning full 
-        color, and the opacity is in the range 0-255, with 255 meaning fully 
-        opaque. 
-        
-        The pixels values in the first column must be in ascending order, but do 
-        not need to be a complete set (i.e. you don't need to supply a color for 
+
+        The Red/Green/Blue values are on the range 0-255, with 255 meaning full
+        color, and the opacity is in the range 0-255, with 255 meaning fully
+        opaque.
+
+        The pixels values in the first column must be in ascending order, but do
+        not need to be a complete set (i.e. you don't need to supply a color for
         every possible pixel value - any not given will default to transparent black).
-        It does not even need to be contiguous. 
-        
-        For reasons of backwards compatability, a 4-column array will also be accepted, 
-        and will be treated as though the row index corresponds to the pixelValue (i.e. 
-        starting at zero). 
+        It does not even need to be contiguous.
+
+        For reasons of backwards compatability, a 4-column array will also be accepted,
+        and will be treated as though the row index corresponds to the pixelValue (i.e.
+        starting at zero).
 
 ### def writeColumn(imgFile, colName, sequence, colType=None, bandNumber=1, colUsage=0)
         Given either an open gdal dataset, or a filename,
@@ -143,7 +143,7 @@
         can specify one of the gdal.GFU_* constants for colUsage - default is 'generic'
 
 ### def writeColumnToBand(gdalBand, colName, sequence, colType=None, colUsage=0)
-        Given a GDAL band, Writes the data specified in sequence 
+        Given a GDAL band, Writes the data specified in sequence
         (can be list, tuple or array etc)
         to the named column in the attribute table assocated with the
         gdalBand. colType must be one of gdal.GFT_Integer,gdal.GFT_Real,gdal.GFT_String.

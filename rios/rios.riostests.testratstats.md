@@ -4,7 +4,7 @@
 ## Functions
 ### def equalTol(a, b, tol)
         Compare two values to within a tolerance. If the difference
-        between the two values is smaller than the tolerance, 
+        between the two values is smaller than the tolerance,
         then return True
 
 ### def run()

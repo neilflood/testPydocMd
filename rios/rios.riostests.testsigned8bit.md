@@ -1,7 +1,7 @@
 # rios.riostests.testsigned8bit
     Test the use of signed 8-bit rasters. The Int8 type was added to GDAL
     in version 3.7, and only later supported properly by RIOS.
-    
+
     This does not test the earlier GDAL implementation using 'PIXELTYPE=SIGNEDBYTE',
     as this is not supported by RIOS.
 

@@ -9,7 +9,7 @@
 ### def checkOutputExtent(ramp1, ramp2, outimg, footprintType)
         Check that the extent of the output image is appropriate for the
         given footprint type and the input extents.
-        
+
         Return True is extent is correct
 
 ### def doSomething(info, inputs, outputs)

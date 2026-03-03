@@ -1,18 +1,18 @@
 # rios.riostests.testcoords
-    A simple set of tests of the access to coordinates from with RIOS. 
+    A simple set of tests of the access to coordinates from with RIOS.
     There are a number of routines on the ReaderInfo class which
-    allow the RIOS use function to access coordinate systems of the 
-    working grid, and the underlying rasters, and this tests whether 
-    these behave as expected, in a range of circumstances. 
+    allow the RIOS use function to access coordinate systems of the
+    working grid, and the underlying rasters, and this tests whether
+    these behave as expected, in a range of circumstances.
 
 ## Functions
 ### def checkCoordList(list1, list2)
         Check equality of given lists of (x,y) coords. Return True if they
-        are the same, False otherwise. 
+        are the same, False otherwise.
 
 ### def checkCoords(testConditionStr, otherargs, tstPixList, centresList)
-        Check that the coordinate lists created in otherargs are the same as 
-        the correct answers passed in to this routine. 
+        Check that the coordinate lists created in otherargs are the same as
+        the correct answers passed in to this routine.
 
 ### def getCoords(info, inputs, outputs, otherargs)
         Accumulate some lists of the coordinates of the top-left corner pixel

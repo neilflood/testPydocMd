@@ -1,16 +1,16 @@
 # rios.riostests.testvector
-    A simple test of the vector inputs. 
-    
+    A simple test of the vector inputs.
+
     Creates a simple raster, and a simple vector, using straight gdal/ogr.
     Then reads the raster, masked by the vector, and calculates the mean of the masked
-    area. Does the same thing with straight numpy, and checks the results. 
+    area. Does the same thing with straight numpy, and checks the results.
 
 ## Functions
 ### def calcMeanWithNumpy()
-        Calculate the mean using numpy. This kind of relies on just "knowing" how the 
+        Calculate the mean using numpy. This kind of relies on just "knowing" how the
         vector was generated. It would be better if the part that generated the vector
         had returned a bit more information that I could just use here, but didn't get
-        too carried away. Should tidy it up, though. 
+        too carried away. Should tidy it up, though.
 
 ### def calcMeanWithRiosApplier(imgfile, vecfile)
         Use RIOS's vector facilities, through the applier, to calculate the

@@ -32,9 +32,9 @@
 ### def testOutputSameFile(imgfile)
 
 ### def testReduceRat(imgfile, imgfile3)
-        This test creates a new output image, with all odd pixel values 
+        This test creates a new output image, with all odd pixel values
         replaced with the even number above it. The RAT must then be copied across
-        with the same reduction performed. In this case, only the even numbered 
+        with the same reduction performed. In this case, only the even numbered
         rows are written
 
 ### def testStringDType(imgfile)

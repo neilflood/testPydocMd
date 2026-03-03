@@ -1,5 +1,5 @@
 # rios.cmdline.riosprintstats
-    Simple function for riosprintstats.py that can be turned into an entry 
+    Simple function for riosprintstats.py that can be turned into an entry
     point.
 
 ## Functions

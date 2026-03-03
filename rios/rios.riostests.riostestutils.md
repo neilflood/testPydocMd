@@ -1,31 +1,31 @@
 # rios.riostests.riostestutils
     Generate a set of test images to use in testing the system.
-    
+
     This set of routines uses only simple gdal routines, so as
-    to be independant of anything inside RIOS. After all, not much use 
-    using RIOS to generate the input images, if RIOS is the 
-    thing being tested. 
+    to be independant of anything inside RIOS. After all, not much use
+    using RIOS to generate the input images, if RIOS is the
+    thing being tested.
 
 ## Functions
 ### def checkBindSocket()
         Check whether we can bind a socket. Needed because Github's servers
         have stopped allowing this, so we need to disable tests which use
         the NetworkDataChannel structure.
-        
+
         Return True if bind() works, false otherwise.
 
 ### def createTestFile(filename, numRows=500, numCols=500, dtype=1, numBands=1, epsg=28355, xLeft=500000, yTop=7000000, xPix=10, yPix=10, driverName='HFA', creationOptions=['COMPRESS=YES'])
         Create a simple test file, on a standard footprint. Has some fairly arbitrary
         default values for all the relevant characteristics, which can be
-        over-ridden as required. 
-        
-        Returns the dataset object. 
+        over-ridden as required.
+
+        Returns the dataset object.
 
 ### def genRampArray(nRows=500, nCols=500)
         Generate a simple 2-d linear ramp. Returns a numpy array of the data
 
 ### def genRampImageFile(filename, reverse=False, xLeft=500000, yTop=7000000, nullVal=None, numRows=500, numCols=500)
-        Generate a test image of a simple 2-d linear ramp. 
+        Generate a test image of a simple 2-d linear ramp.
 
 ### def genRowColImage(filename, nrows, ncols, xPix, yPix, xLeft, yTop)
         Generate a 2-layer image. For each pixel, the two layer values
@@ -40,10 +40,10 @@
 
 ### def removeRasterFile(filename)
         Remove the given GDAL raster file, using the appropriate driver.
-        Mainly called to remove temporary files created by the tests. 
+        Mainly called to remove temporary files created by the tests.
 
 ### def removeVectorFile(filename)
-        Remove the given OGR vector file, using the appropriate driver. 
+        Remove the given OGR vector file, using the appropriate driver.
 
 ### def report(testName, message)
         Report a test result
@@ -53,7 +53,7 @@
 
 ### def testAll()
         Runs all the tests - called from testrios.py
-        
+
         Returns number of tests that fail
 
 ## Values

@@ -6,12 +6,12 @@
 ## Classes
 ### class AWSBatchComputeWorkerMgr(ComputeWorkerManager)
       Manage compute workers using AWS Batch.
-      
+
       Obsolete, and likely to be deprecated. See ECSComputeWorkerMgr instead.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AWSBatchComputeWorkerMgr.getStackOutputs(self)
           Helper function to query the CloudFormation stack for outputs.
-          
+
           Uses the RIOS_AWSBATCH_STACK and RIOS_AWSBATCH_REGION env vars to
           determine which stack and region to query.
 
@@ -26,7 +26,7 @@
       PBS or SLURM. Initially constructed with computeWorkerKind = None,
       one must then assign computeWorkerKind as either CW_PBS or CW_SLURM
       before use.
-      
+
       Will make use of the computeWorkerExtraParams argument to ConcurrencyStyle,
       if given, but this is optional. If given, it should be a dictionary, see
       :doc:`concurrency` for details.
@@ -79,7 +79,7 @@
 
 ### class ComputeWorkerManager(ABC)
       Abstract base class for all compute-worker manager subclasses
-      
+
       A subclass implements a particular way of managing RIOS
       compute-workers. It should over-ride all abstract methods given here.
 
@@ -100,9 +100,9 @@
           the workers and the main thread. This is expected to be the
           same for all workers running on separate machines from the
           main thread.
-          
+
           Creates the dataChan and outqueue attributes.
-          
+
           This routine is not needed for the Threads subclass, because it
           does not use the network versions of these communications.
 
@@ -114,14 +114,14 @@
 
 ### class ECSComputeWorkerMgr(ComputeWorkerManager)
       Manage compute workers using Amazon AWS ECS
-      
+
       New in version 2.0.7
-      
+
       Requires some extra parameters in the ConcurrencyStyle constructor
       (computeWorkerExtraParams), in order to configure the AWS infrastructure.
       This class provides some helper functions for creating these for
       various use cases.
-      
+
       When creating a private cluster of EC2 instances, these are automatically
       tagged with some AWS tags. See `Concurrency <concurrency.html>`_ doc page
       for details.
@@ -148,9 +148,9 @@
           Helper function to construct a minimal computeWorkerExtraParams
           dictionary suitable for using ECS with Fargate launchType, given
           just the bare essential information.
-          
+
           Returns a Python dictionary.
-          
+
           jobName : str
               Arbitrary string, optional. If given, this name will be incorporated
               into some AWS/ECS names for the compute workers, including the
@@ -200,7 +200,7 @@
               pairs which will be turned into AWS tags. These will be added to
               the ECS cluster, task definition and tasks. The keys and values
               must all be strings. Requires ``ecs:TagResource`` permission.
-          
+
           Only certain combinations of cpu and memory are allowed, as these are used
           by Fargate to select a suitable VM instance type. See ESC.Client.run_task()
           documentation for further details.
@@ -209,9 +209,9 @@
           Helper function to construct a basic computeWorkerExtraParams
           dictionary suitable for using ECS with a private per-job cluster,
           given just the bare essential information.
-          
+
           Returns a Python dictionary.
-          
+
           jobName : str
               Arbitrary string, optional. If given, this name will be incorporated
               into some AWS/ECS names for the compute workers, including the
@@ -295,7 +295,7 @@
 
 ### class SubprocComputeWorkerManager(ComputeWorkerManager)
       Purely for testing, not for normal use.
-      
+
       This class manages compute workers run through subprocess.Popen.
       This is not normally any improvement over using CW_THREADS, and
       should be avoided. I am using this purely as a test framework

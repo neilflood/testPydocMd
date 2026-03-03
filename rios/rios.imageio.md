@@ -1,14 +1,14 @@
 # rios.imageio
     The only things of value left in this module are the original definitions of
     UNION, INTERSECTION and BOUNDS_FROM_REFERENCE.
-    
+
     There are also two functions wld2pix and pix2wld, and the Coord class they use.
     These should also be deprecated, in favour of GDAL's ApplyGeoTransform
     and InvGeoTransform (which they now use internally anyway).
     However, they are used in public-facing ways in the ReaderInfo object,
     so removing them would, in principle, be a breaking change.
     They are harmless enough, so they have been left here.
-    
+
     In general, this module should be ignored.
 
 ## Classes
@@ -22,13 +22,13 @@
 ### def GDALTypeToNumpyType(gdaltype)
         This function is deprecated.
         Use gdal_array.GDALTypeCodeToNumericTypeCode instead.
-        
+
         Given a gdal data type returns the matching numpy data type
 
 ### def NumpyTypeToGDALType(numpytype)
         This function is deprecated.
         Use gdal_array.NumericTypeCodeToGDALTypeCode instead.
-        
+
         For a given numpy data type returns the matching GDAL data type
 
 ### def pix2wld(transform, x, y)

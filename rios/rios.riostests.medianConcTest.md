@@ -7,7 +7,7 @@
         Calculate per-pixel median of the list of files. Sam's code
 
 ### def getCentroid(tile)
-        Query the shapefile of centroids to 
+        Query the shapefile of centroids to
 
 ### def getCmdargs()
         Get command line arguments
@@ -15,6 +15,10 @@
 ### def main()
 
 ### def makeRefPixgrid(img)
+
+### def numbaMedian(data, nodata)
+        Function utilises Numba to calculate median from stacked arrays.
+        returns 3d array. Sam's code.
 
 ### def searchStac(cmdargs)
         Search the STAC server for suitable tiles. Return a dictionary
@@ -26,5 +30,4 @@
     CW_THREADS = 'CW_THREADS'
     RIOS_VERSION = '2.0.9'
     collection = 'sentinel-2-l2a'
-    numbaMedian = CPUDispatcher(<function numbaMedian at 0x72acba195a80>)
     stacServer = 'https://earth-search.aws.element84.com/v1/'

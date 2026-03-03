@@ -1,6 +1,6 @@
 # rios.riostests.testbeforeclose
     Test the beforeCloseFunc callback.
-    
+
     This is a function which is called just before the output file is closed,
     and is passed the still-open Dataset.
 
